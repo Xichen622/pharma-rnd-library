@@ -27,7 +27,271 @@ nav label:hover,.tab-menu label:hover{background:#e1f7f4;color:#008b94}
 .panel-directory a:hover{background:#e1f7f4}
 .content-panel section[id]{scroll-margin-top:88px}
 @media(max-width:850px){.tab-menu{display:none}nav{display:flex;overflow-x:auto;white-space:nowrap}nav label{font-size:12px;padding:9px 10px}}
-</style></head><body>
+/* ===== iPhone mobile layout ===== */
+@media screen and (max-width: 850px) {
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: auto;
+    min-height: 64px;
+    padding:
+      max(10px, env(safe-area-inset-top))
+      12px
+      10px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .brand b {
+    font-size: 16px;
+  }
+
+  .brand small {
+    font-size: 10px;
+  }
+
+  nav {
+    order: 3;
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    gap: 6px;
+    padding: 4px 0 2px;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  nav label {
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 10px 13px;
+    font-size: 14px;
+  }
+
+  .layout {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 12px 0;
+    padding:
+      0
+      max(10px, env(safe-area-inset-right))
+      calc(24px + env(safe-area-inset-bottom))
+      max(10px, env(safe-area-inset-left));
+  }
+
+  .side {
+    display: none;
+  }
+
+  main,
+  .content-panel,
+  .hero,
+  .bundle,
+  details,
+  summary,
+  .body,
+  .article,
+  .pack {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .hero {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .hero h1 {
+    font-size: 25px;
+    line-height: 1.25;
+  }
+
+  .hero p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .panel-directory {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .panel-directory a {
+    flex: 0 0 auto;
+    max-width: 260px;
+    white-space: normal;
+    line-height: 1.4;
+  }
+
+  .bundle {
+    margin: 12px 0;
+    border-radius: 14px;
+  }
+
+  .bundlehead {
+    padding: 14px;
+    align-items: flex-start;
+  }
+
+  .bundlehead h2 {
+    font-size: 17px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .bundlehead small {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  summary {
+    grid-template-columns: 44px minmax(0, 1fr);
+    padding: 13px 14px;
+  }
+
+  .title,
+  .sub {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .title {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .sub {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .body,
+  .article,
+  .pack {
+    padding: 8px 15px 22px;
+    overflow-x: hidden;
+  }
+
+  .body h4,
+  .article h4,
+  .pack h4 {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-top: 20px;
+  }
+
+  .body p,
+  .body li,
+  .article p,
+  .article li,
+  .pack p,
+  .pack li {
+    font-size: 15px;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+  }
+
+  .body ul,
+  .article ul,
+  .pack ul {
+    padding-left: 21px;
+  }
+
+  .quote,
+  .sample,
+  .dialog,
+  .case,
+  .structure,
+  .practice {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    overflow-wrap: anywhere;
+  }
+
+  /* Tables remain readable without shrinking the whole page */
+  .vocab {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .vocab tbody {
+    display: table;
+    width: 100%;
+    min-width: 560px;
+  }
+
+  .vocab th,
+  .vocab td,
+  .vocab td.term,
+  .vocab td:nth-child(2) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    min-width: 130px;
+    padding: 9px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .vocab td.term {
+    min-width: 145px;
+  }
+
+  .stats,
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .cols,
+  .twocol,
+  .dialog {
+    grid-template-columns: 1fr;
+  }
+
+  .ptag {
+    margin-bottom: 5px;
+  }
+}</style></head><body>
 <input checked="" class="tab-state" id="tab-knowledge" name="main-tab" type="radio"/>
 <input class="tab-state" id="tab-english" name="main-tab" type="radio"/>
 <input class="tab-state" id="tab-products" name="main-tab" type="radio"/>
