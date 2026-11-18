@@ -1,0 +1,639 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Fish Pharma R&amp;D Library</title><style>
+:root{--paper:#f6f1eb;--ink:#1e1a1f;--ink2:#4a4248;--muted:#8a7f84;--hair:#ddd2c9;--plum:#2a1e27;--rose:#c4849a;--rose-d:#9b5670;--blush:#f1dfe3;--champ:#e7d3c3;--gold:#b8916f;--teal:#4f8580;--amber:#a6772f;
+--serif:"Songti SC","STSong","SimSun","Noto Serif SC","Source Han Serif SC",Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Microsoft YaHei",Arial,sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:var(--rose-d);text-decoration:none}::selection{background:var(--blush)}
+.st{position:absolute;opacity:0;width:1px;height:1px;top:0;left:0}label{cursor:pointer}.page{display:none}
+#t-knowledge:checked~main #p-knowledge,#t-workflow:checked~main #p-workflow,#t-products:checked~main #p-products,#t-k1:checked~main #p-k1,#t-k2:checked~main #p-k2,#t-k3:checked~main #p-k3,#t-w1:checked~main #p-w1,#t-w2:checked~main #p-w2,#t-w3:checked~main #p-w3,#t-p1:checked~main #p-p1,#t-p2:checked~main #p-p2,#t-p3:checked~main #p-p3,#t-p4:checked~main #p-p4{display:block}
+/* header */
+header.top{position:sticky;top:0;z-index:30;background:rgba(42,30,39,.97);padding-top:env(safe-area-inset-top);border-bottom:1px solid rgba(231,211,195,.14)}
+.bar,nav.tabs{max-width:1180px;margin:0 auto;padding-left:24px;padding-right:24px}
+.bar{padding-top:14px;padding-bottom:2px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:34px;height:34px;flex:0 0 34px;border-radius:50%;box-shadow:0 0 0 1px rgba(231,211,195,.4)}
+.brand b{display:block;font-family:var(--serif);font-weight:400;font-size:19px;letter-spacing:.8px;color:#f6ece6;line-height:1.2}
+.brand small{display:block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-top:3px}
+nav.tabs{display:flex;gap:32px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs label{flex:0 0 auto;padding:10px 0 12px;font-size:14.5px;letter-spacing:1.5px;color:rgba(246,236,230,.5);border-bottom:1px solid transparent;transition:.25s}
+nav.tabs label:hover{color:#f6ece6}
+#t-knowledge:checked~header .tab-knowledge,#t-k1:checked~header .tab-knowledge,#t-k2:checked~header .tab-knowledge,#t-k3:checked~header .tab-knowledge,#t-workflow:checked~header .tab-workflow,#t-w1:checked~header .tab-workflow,#t-w2:checked~header .tab-workflow,#t-w3:checked~header .tab-workflow,#t-products:checked~header .tab-products,#t-p1:checked~header .tab-products,#t-p2:checked~header .tab-products,#t-p3:checked~header .tab-products,#t-p4:checked~header .tab-products{color:#fff;border-color:var(--rose)}
+main{max-width:1180px;margin:0 auto;padding:0 24px calc(56px + env(safe-area-inset-bottom))}
+/* section hero (full width) */
+.hero{position:relative;margin:0 calc(50% - 50vw);padding:66px max(24px,calc(50vw - 566px)) 58px;color:#f6ece6;overflow:hidden;
+background:radial-gradient(55% 90% at 90% 0%,rgba(196,132,154,.42),transparent 62%),radial-gradient(45% 80% at 0% 100%,rgba(184,145,111,.2),transparent 60%),linear-gradient(160deg,#2a1e27,#3b2935 60%,#4b3241)}
+.hero:after{content:"";position:absolute;right:max(24px,calc(50vw - 566px));top:50%;transform:translateY(-50%);width:220px;height:220px;border:1px solid rgba(231,211,195,.2);border-radius:50%;box-shadow:0 0 0 40px rgba(231,211,195,.04),0 0 0 80px rgba(231,211,195,.025)}
+.eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
+.hero h1{position:relative;z-index:1;font-family:var(--serif);font-weight:400;font-size:44px;letter-spacing:6px;margin:12px 0 14px;line-height:1.2}
+.hero p{position:relative;z-index:1;margin:0;max-width:560px;font-size:15.5px;color:rgba(246,236,230,.78)}
+.count{position:relative;z-index:1;display:inline-block;margin-top:22px;font-size:12px;letter-spacing:2px;color:var(--champ);border-top:1px solid rgba(231,211,195,.35);padding-top:10px}
+/* editorial index */
+.list{margin-top:34px;border-top:1px solid var(--ink)}
+.card{display:grid;grid-template-columns:84px minmax(0,1fr);gap:8px;padding:30px 6px;border-bottom:1px solid var(--hair);color:var(--ink);transition:background .3s}
+.card:hover{background:linear-gradient(90deg,rgba(241,223,227,.6),transparent 75%)}
+.num{font-family:Georgia,var(--serif);font-size:42px;line-height:1;color:transparent;-webkit-text-stroke:1px var(--rose)}
+.txt{display:block}
+.card .t{display:block;font-family:var(--serif);font-size:22px;letter-spacing:.6px;line-height:1.5}
+.card .d{display:block;font-size:14.5px;color:var(--muted);margin-top:6px;line-height:1.7}
+.card .go{display:inline-block;margin-top:12px;font-size:11.5px;letter-spacing:2.5px;color:var(--rose-d);border-bottom:1px solid var(--rose);padding-bottom:1px}
+/* article */
+.back{display:inline-block;margin:30px 0 4px;font-size:12.5px;letter-spacing:2px;color:var(--muted)}.back:hover{color:var(--rose-d)}
+article h1{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.45;letter-spacing:1px;margin:12px 0 14px}
+.meta{font-size:12.5px;letter-spacing:1px;color:var(--muted);padding-bottom:22px;border-bottom:1px solid var(--ink);margin-bottom:8px}
+.key{background:var(--plum);color:#f6ece6;border-radius:3px;padding:26px 26px 12px;margin:28px 0 30px}
+.key h3{margin:0 0 18px;font-size:11px;letter-spacing:4px;color:var(--gold);font-weight:400}
+.key ol{margin:0;padding:0;list-style:none;counter-reset:k}
+.key li{counter-increment:k;position:relative;padding:0 0 18px 46px;font-size:15.5px;line-height:1.8;color:rgba(246,236,230,.85)}
+.key li:before{content:counter(k,decimal-leading-zero);position:absolute;left:0;top:-3px;font-family:Georgia,serif;font-size:24px;color:var(--rose)}
+.key li b{color:#fff}
+.toc{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:16px 0;margin-bottom:34px;font-size:14px}
+.toc b{display:block;margin-bottom:8px;color:var(--gold);font-size:11px;letter-spacing:3px;font-weight:400}
+.toc a{display:block;padding:5px 0;color:var(--ink2);transition:.2s}.toc a:hover{color:var(--rose-d);padding-left:4px}
+article h2{font-family:var(--serif);font-weight:400;font-size:25px;letter-spacing:1px;line-height:1.5;margin:58px 0 16px;scroll-margin-top:130px}
+article h2:before{content:"";display:block;width:36px;height:1px;background:var(--rose);margin-bottom:16px}
+article h3{font-family:var(--serif);font-weight:700;font-size:18.5px;line-height:1.6;margin:36px 0 8px}
+.lead{font-family:var(--serif);font-size:17.5px;line-height:1.75;color:var(--rose-d);border-left:1px solid var(--rose);padding:2px 0 2px 18px;margin:12px 0 16px}
+article p{margin:12px 0;color:#2f2a2e}article ul,article ol{padding-left:22px}article li{margin:6px 0}article li::marker{color:var(--rose)}
+.q,.case,.step,.trap,details.quiz,.ev{background:#fbf8f5;border:1px solid var(--hair);border-radius:2px;padding:18px 20px;margin:14px 0}
+.q b.qq{display:block;font-family:var(--serif);font-size:16.5px;margin-bottom:6px}
+.case{border-top:2px solid var(--plum)}
+.case .tag{font-size:11px;letter-spacing:2px;color:var(--rose-d)}
+.case .name{font-family:var(--serif);font-size:19px;margin-top:4px}
+.case dl{margin:8px 0 0}.case dt{font-size:11px;letter-spacing:2px;color:var(--gold);margin-top:14px}.case dd{margin:3px 0 0;font-size:15px;color:#2f2a2e}
+.step{border-left:2px solid var(--plum)}
+.step .no{font-family:Georgia,serif;color:var(--rose-d);font-size:16px;margin-right:10px}.step .no:after{content:" /"}
+.step .st{font-family:var(--serif);font-size:17px;font-weight:700}.step p{margin:8px 0 0;font-size:15px}
+.dep{font-size:13.5px;color:var(--teal);margin-top:10px;padding-top:8px;border-top:1px dashed var(--hair)}
+.note{border:1px solid var(--champ);border-radius:2px;padding:12px 16px;font-size:14px;color:#6b5745;margin:16px 0}
+.trap .x{color:#a2445f;font-weight:700}.trap .ok{color:var(--teal);font-weight:700}
+.remember{margin:46px 0;padding:34px 30px;background:var(--plum);color:#f6ece6;font-family:var(--serif);font-size:21px;line-height:1.7;letter-spacing:1px;text-align:center;border-radius:2px}
+.remember:before{content:"“";display:block;font-family:Georgia,serif;font-size:60px;line-height:.6;color:var(--rose);margin-bottom:14px}
+.remember small{display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:4px;color:var(--gold);margin-bottom:10px}
+.term{border-bottom:1px solid var(--hair);padding:16px 0}
+.term b{font-family:var(--serif);font-size:17px}.term .zh{color:var(--rose-d);font-size:13.5px;margin-left:10px}
+.term .use{font-size:14.5px;color:var(--ink2);margin-top:4px}.term .ex{font-family:Georgia,var(--serif);font-size:15px;color:#7d6a71;font-style:italic;margin-top:4px}
+details.quiz summary{font-family:var(--serif);font-size:16.5px;line-height:1.65;list-style:none;cursor:pointer}
+details.quiz summary::-webkit-details-marker{display:none}
+details.quiz summary:after{content:"   查看答案";font-family:var(--sans);font-size:11px;letter-spacing:2px;color:var(--rose-d)}
+details.quiz[open] summary:after{content:"   收起"}
+details.quiz div{margin-top:12px;font-size:15px;color:var(--ink2);border-top:1px solid var(--hair);padding-top:12px}
+.ev{border-top:2px solid #9aa4aa}.ev b{display:block;font-size:12px;letter-spacing:3px;margin-bottom:6px}.ev ul{margin:4px 0;padding-left:20px}.ev li{font-size:15px}
+.ev1{border-top-color:var(--teal)}.ev1 b{color:var(--teal)}.ev2{border-top-color:var(--amber)}.ev2 b{color:var(--amber)}.ev3 b{color:#6b767c}
+.story p{font-family:var(--serif);font-size:17px;line-height:2;color:#2a2529}
+.story .chap+p:first-letter{font-size:3em;float:left;line-height:.95;margin:6px 8px 0 0;color:var(--rose-d)}
+.chap{font-size:12px;letter-spacing:3px;color:var(--gold);margin-top:34px}
+.src li{font-size:13.5px;color:#6a6066;margin:8px 0;overflow-wrap:anywhere}
+.pager{display:flex;margin-top:56px;border-top:1px solid var(--ink)}
+.pager label{flex:1;padding:20px 4px;font-family:var(--serif);font-size:16px;color:var(--ink);line-height:1.5;border-bottom:1px solid var(--hair)}
+.pager label+label{text-align:right;border-left:1px solid var(--hair);padding-left:16px}
+.pager span{display:block;font-family:var(--sans);color:var(--gold);font-size:10.5px;letter-spacing:3px;margin-bottom:4px}
+.foot{margin-top:70px;padding-top:24px;border-top:1px solid var(--hair);text-align:center;font-size:11px;letter-spacing:2px;color:#a3979c}
+@media(min-width:1000px){
+.bar,nav.tabs{padding-left:32px;padding-right:32px}.brand b{font-size:21px}nav.tabs{gap:42px}
+main{padding:0 32px 70px}
+.hero{padding:96px max(32px,calc(50vw - 558px)) 84px}.hero h1{font-size:60px;letter-spacing:10px}.hero:after{width:320px;height:320px}
+.card{grid-template-columns:120px minmax(0,1fr);padding:38px 8px}.num{font-size:58px}.card .t{font-size:26px}
+article{display:grid;grid-template-columns:minmax(0,720px) 230px;column-gap:80px;justify-content:space-between;align-items:start}
+article>*{grid-column:1;min-width:0}
+article>.toc{grid-column:2;grid-row:1/span 400;position:sticky;top:140px;margin:96px 0 0;border:0;border-left:1px solid var(--hair);padding:0 0 0 22px}
+article h1{font-size:42px;margin-top:18px}
+.key ol{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}.key li{padding:44px 0 6px}.key li:before{top:0;font-size:30px}
+article p,article li{font-size:16.5px}.pager{max-width:720px}}
+@media(max-width:600px){
+.bar,nav.tabs{padding-left:18px;padding-right:18px}nav.tabs{gap:24px}main{padding:0 18px calc(48px + env(safe-area-inset-bottom))}
+.hero{padding:48px 18px 42px}.hero h1{font-size:36px;letter-spacing:4px}.hero:after{width:150px;height:150px;right:-40px}
+.card{grid-template-columns:56px minmax(0,1fr);padding:24px 2px}.num{font-size:32px}.card .t{font-size:19px}
+article h1{font-size:27px}.remember{font-size:18.5px;padding:28px 20px}
+.pager{flex-direction:column}.pager label+label{text-align:left;border-left:0;padding-left:4px}}
+
+/* ===== Typography system (unified) ===== */
+:root{--fs-xs:12px;--fs-sm:14px;--fs-base:16px;--fs-md:18px;--fs-lg:22px;--fs-xl:30px;--lh:1.8;--ls-label:2px}
+/* 1. sans for all reading text, same size & weight */
+article p,article li,.lead,.story p,.q,.case dd,.step p,.key li,.ev li,details.quiz div,details.quiz summary,.trap,.toc a,.term .use,.term .ex,.note,.dep,.card .d,.hero p{font-family:var(--sans)!important;font-style:normal!important;letter-spacing:0!important}
+article p,article li,.story p,.case dd,.step p,.key li,.ev li,.q,.trap,details.quiz summary,details.quiz div{font-size:var(--fs-base)!important;line-height:var(--lh)!important;color:#2f2a2e}
+.key li{color:rgba(246,236,230,.88)!important}
+/* 2. serif only for titles */
+.brand b,.hero h1,article h1,article h2,article h3,.card .t,.case .name,.step .st,.q b.qq,.term b,.remember,.pager label{font-family:var(--serif)!important;font-weight:600!important;font-style:normal!important}
+article h1{font-size:var(--fs-xl)!important;line-height:1.45!important;letter-spacing:.5px!important}
+article h2{font-size:var(--fs-lg)!important;line-height:1.5!important;letter-spacing:.5px!important}
+article h3,.card .t{font-size:var(--fs-md)!important;line-height:1.55!important;letter-spacing:.3px!important}
+.case .name,.step .st,.q b.qq,.term b,.pager label{font-size:var(--fs-base)!important;line-height:1.6!important;letter-spacing:.2px!important}
+.q b.qq{margin-bottom:4px}
+/* 3. lead = emphasis, not a different font */
+.lead{font-size:var(--fs-base)!important;font-weight:600!important;line-height:var(--lh)!important;color:var(--rose-d)!important}
+/* 4. secondary text */
+.card .d,.term .use,.note,.dep,.src li,.toc a,.hero p{font-size:var(--fs-sm)!important;line-height:1.7!important}
+.term .ex{font-size:var(--fs-sm)!important;color:var(--muted)!important}
+.term .zh{font-family:var(--sans);font-size:var(--fs-sm)!important}
+/* 5. all labels: one style */
+.eyebrow,.count,.meta,.key h3,.toc b,.case .tag,.case dt,.chap,.remember small,.pager span,.card .go,.back,.ev b,.foot,.brand small,details.quiz summary:after{font-family:var(--sans)!important;font-size:var(--fs-xs)!important;font-weight:600!important;letter-spacing:var(--ls-label)!important;font-style:normal!important}
+.meta{font-weight:400!important;letter-spacing:1px!important}
+/* 6. remember & numbers */
+.remember{font-size:var(--fs-md)!important;line-height:1.7!important;letter-spacing:.5px!important}
+.key li:before,.num,.step .no{font-family:Georgia,"Times New Roman",serif!important;font-weight:400!important}
+.step .no{font-size:var(--fs-base)!important}
+.story .chap+p:first-letter{font-size:inherit!important;float:none!important;margin:0!important;color:inherit!important}
+nav.tabs label{font-size:var(--fs-sm)!important;font-weight:600}
+@media(min-width:1000px){
+ .hero h1{font-size:52px!important;letter-spacing:8px!important}
+ article h1{font-size:36px!important}
+ article h2{font-size:24px!important}
+ .card .t{font-size:22px!important}
+ nav.tabs label{font-size:15px!important}}
+@media(max-width:600px){
+ .hero h1{font-size:32px!important;letter-spacing:4px!important}
+ article h1{font-size:25px!important}
+ article h2{font-size:20px!important}
+ .card .t{font-size:17px!important}
+ article p,article li,.story p,.case dd,.step p,.key li,.ev li,.q,.trap,details.quiz summary,details.quiz div,.lead{font-size:15.5px!important}}
+
+/* ===== Fish identity ===== */
+.fishw{font-family:Georgia,"Times New Roman",serif!important;font-style:italic!important;font-weight:400!important;color:var(--rose)!important;font-size:1.32em;letter-spacing:0;margin-right:2px}
+.hero:after{border:0!important;box-shadow:none!important;border-radius:0!important;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M8 32c8-12 22-14 34-6l10-8v28l-10-8C30 46 16 44 8 32z' fill='none' stroke='%23e7d3c3' stroke-width='0.8'/><circle cx='20' cy='30' r='1.6' fill='%23e7d3c3'/></svg>") no-repeat center/contain;width:300px!important;height:300px!important;opacity:.55;transform:translateY(-50%) rotate(-8deg)!important}
+@media(max-width:600px){.hero:after{width:170px!important;height:170px!important;right:-20px!important}}
+article h2:before{width:34px!important;height:17px!important;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><path d='M4 16c6-8 16-9 25-4l7-6v20l-7-6C20 25 10 24 4 16z' fill='%23c4849a'/><circle cx='13' cy='15' r='1.6' fill='%23f6f1eb'/></svg>") no-repeat left center/contain!important;opacity:.9}
+.remember:before{content:""!important;width:44px;height:22px;margin:0 auto 14px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><path d='M4 16c6-8 16-9 25-4l7-6v20l-7-6C20 25 10 24 4 16z' fill='%23c4849a'/><circle cx='13' cy='15' r='1.6' fill='%23f6f1eb'/></svg>") no-repeat center/contain}
+.foot .fishw{font-size:15px}
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));width:42px;height:42px;border-radius:50%;background:var(--plum);color:#f6ece6;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 6px 18px rgba(42,30,39,.25);z-index:40;opacity:.88}
+.totop:hover{opacity:1;color:#fff}
+.mins{color:var(--muted);font-weight:400;letter-spacing:1px;margin-left:8px}
+
+/* ===== Fish motion ===== */
+.logo .tail,.totop .tail{transform-box:fill-box;transform-origin:0% 50%;animation:wag 1.8s ease-in-out infinite}
+.logo .fin,.totop .fin{transform-box:fill-box;transform-origin:50% 100%;animation:finw 3.6s ease-in-out infinite}
+.logo .swim{animation:bob 4.5s ease-in-out infinite}
+.bub{transform-box:fill-box;transform-origin:center;opacity:0;animation:rise 4.2s ease-in infinite}
+.bub.b2{animation-delay:2.1s}
+.brand:hover .tail{animation-duration:.45s}
+.brand:hover .swim{animation:dash .9s ease-in-out}
+@keyframes wag{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
+@keyframes finw{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.82)}}
+@keyframes bob{0%,100%{transform:translate(0,0)}50%{transform:translate(-1px,-1.5px)}}
+@keyframes dash{0%{transform:translateX(0)}40%{transform:translateX(-3px)}100%{transform:translateX(0)}}
+@keyframes rise{0%{opacity:0;transform:translateY(4px) scale(.6)}20%{opacity:.9}100%{opacity:0;transform:translateY(-12px) scale(1.15)}}
+/* back to top */
+.totop{width:50px!important;height:50px!important;border-radius:50%!important;background:radial-gradient(circle at 30% 25%,#4b3241,#2a1e27 70%)!important;box-shadow:0 8px 22px rgba(42,30,39,.28),inset 0 0 0 1px rgba(231,211,195,.18)!important;opacity:.92!important;transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .3s}
+.totop svg{width:34px;height:34px;overflow:visible}
+.totop .swim{animation:bobv 3.2s ease-in-out infinite}
+.totop:hover{opacity:1!important;transform:translateY(-4px);box-shadow:0 12px 28px rgba(148,80,106,.35),inset 0 0 0 1px rgba(196,132,154,.5)!important}
+.totop:hover .tail{animation-duration:.4s}
+.totop:hover .swim{animation:up .7s ease-out infinite}
+.totop:active{transform:translateY(-10px) scale(.96)}
+@keyframes bobv{0%,100%{transform:translateX(0)}50%{transform:translateX(-2px)}}
+@keyframes up{0%{transform:translateX(0)}50%{transform:translateX(-4px)}100%{transform:translateX(0)}}
+/* hero: two drifting fish */
+.hero:after{animation:drift 16s ease-in-out infinite}
+.hero:before{content:"";position:absolute;width:64px;height:64px;right:max(320px,calc(50vw - 260px));bottom:18%;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M11 32C16.5 21.5 33 19.5 45.5 32C33 44.5 16.5 42.5 11 32ZM44 32L55 22.5Q51.5 32 55 41.5Z' fill='none' stroke='%23e7d3c3' stroke-width='1'/><circle cx='20' cy='30.6' r='1.5' fill='%23e7d3c3'/></svg>") no-repeat center/contain;opacity:.45;transform:scaleX(-1);animation:drift2 22s ease-in-out infinite;pointer-events:none}
+@keyframes drift{0%,100%{translate:0 0}50%{translate:-26px -10px}}
+@keyframes drift2{0%,100%{translate:0 0}50%{translate:40px -14px}}
+/* section fish */
+article h2:before{transition:translate .5s ease}
+article h2:hover:before{translate:6px 0}
+@media(max-width:600px){.hero:before{width:40px;height:40px;right:46%;bottom:12%}.totop{width:46px!important;height:46px!important}.totop svg{width:30px;height:30px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style><link rel="apple-touch-icon" href="./app-icon.png">
+<link rel="icon" type="image/png" href="./app-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Fish Library">
+<meta name="theme-color" content="#2a1e27">
+</head><body><input class="st" type="radio" name="pg" id="t-knowledge" checked><input class="st" type="radio" name="pg" id="t-workflow"><input class="st" type="radio" name="pg" id="t-products"><input class="st" type="radio" name="pg" id="t-k1"><input class="st" type="radio" name="pg" id="t-k2"><input class="st" type="radio" name="pg" id="t-k3"><input class="st" type="radio" name="pg" id="t-w1"><input class="st" type="radio" name="pg" id="t-w2"><input class="st" type="radio" name="pg" id="t-w3"><input class="st" type="radio" name="pg" id="t-p1"><input class="st" type="radio" name="pg" id="t-p2"><input class="st" type="radio" name="pg" id="t-p3"><input class="st" type="radio" name="pg" id="t-p4">
+<header class="top"><div class="bar"><label class="brand" for="t-knowledge"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs>
+<linearGradient id="fg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6a8ba"/><stop offset="1" stop-color="#94506a"/></linearGradient>
+<linearGradient id="fb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffaf6"/><stop offset="1" stop-color="#ecd9d0"/></linearGradient></defs>
+<circle cx="32" cy="32" r="32" fill="url(#fg)"/>
+<g class="swim"><path class="tail" d="M44 32 L55 22.5 Q51.5 32 55 41.5 Z" fill="url(#fb)"/>
+<path class="fin" d="M26 25.5 Q31 17.5 37.5 25 Z" fill="#f1dfe3"/>
+<path d="M11 32 C16.5 21.5 33 19.5 45.5 32 C33 44.5 16.5 42.5 11 32 Z" fill="url(#fb)"/>
+<path d="M29.5 26.5 Q32.5 32 29.5 37.5" fill="none" stroke="#d9b4bf" stroke-width="1.1" stroke-linecap="round"/>
+<circle cx="20" cy="30.6" r="2.1" fill="#6e3550"/><circle cx="20.7" cy="29.9" r=".7" fill="#fff"/></g>
+<circle class="bub b1" cx="9" cy="27" r="1.7" fill="none" stroke="#fffaf6" stroke-width=".9"/>
+<circle class="bub b2" cx="11" cy="24" r="1.1" fill="none" stroke="#fffaf6" stroke-width=".8"/></svg><span><b><i class="fishw">Fish</i> Pharma R&amp;D Library</b><small>Swim through the evidence</small></span></label></div>
+<nav class="tabs"><label for="t-knowledge" class="tab-knowledge">专业知识</label><label for="t-workflow" class="tab-workflow">工作实务</label><label for="t-products" class="tab-products">产品开发档案</label></nav></header><main>
+<section class="page" id="p-knowledge"><section class="hero"><div class="eyebrow">Fish · Knowledge</div><h1>专业知识</h1><p>围绕一个真实决策问题展开：怎样判断，为什么这样判断。</p><div class="count">3 篇文章</div></section><div class="list"><label class="card" for="t-k1"><span class="num">01</span><span class="txt"><span class="t">主要终点怎样选择：OS、PFS、ORR、MFS与复合终点</span><span class="d">同一家公司的产品为什么选了不同终点，以及怎样读复合终点</span><span class="go">阅读全文 —</span></span></label><label class="card" for="t-k2"><span class="num">02</span><span class="txt"><span class="t">单臂研究什么时候足以支持上市</span><span class="d">效应大小、能否归因于药物、独立审评与上市后确认</span><span class="go">阅读全文 —</span></span></label><label class="card" for="t-k3"><span class="num">03</span><span class="txt"><span class="t">怎样读懂生存分析结果：KM曲线、HR、95% CI和期中分析</span><span class="d">用六个真实结果读懂显著、接近1、不显著与提前停止</span><span class="go">阅读全文 —</span></span></label></div></section>
+
+<section class="page" id="p-k1"><label class="back" for="t-knowledge">← 返回专业知识</label><article>
+<h1>主要终点怎样选择：OS、PFS、ORR、MFS与复合终点</h1>
+<div class="meta">案例：Darolutamide · Larotrectinib · Finerenone · Radium-223｜整理：2026年11月</div>
+<div class="key"><h3>先记住三条结论</h3><ol>
+<li><b>主要终点首先回答“这项研究要支持什么决策”</b>，而不是挑一个“最硬”的指标。同一个药在不同疾病阶段，主要终点可以完全不同。</li>
+<li><b>OS最可信，但最慢，也最容易被后续治疗冲淡。</b>PFS、rPFS、MFS能更早读出，但需要说明它和患者获益有关，并控制评估偏倚。ORR通常只在单臂、效应很大、人群罕见的情况下才够用。</li>
+<li><b>复合终点能增加事件数，但“整体显著”不等于“每个组分都改善”。</b>读结果时一定要拆开看是哪个组分在推动结果。</li></ol></div>
+<div class="toc"><b>本文目录</b><a href="#k1-frame">一、判断框架：选终点前先问5个问题</a><a href="#k1-cases">二、跨产品比较：同一家公司的产品为什么选了不同终点</a><a href="#k1-deep">三、按问题深入</a><a href="#k1-traps">四、易错点</a><a href="#k1-en">五、Key English</a><a href="#k1-quiz">六、自测</a><a href="#k1-src">七、公开资料来源</a></div>
+<h2 id="k1-frame">一、判断框架：选终点前先问5个问题</h2>
+<div class="lead">终点不是从清单里挑，而是由疾病阶段、对照、可行性和监管先例共同决定。</div>
+<div class="q"><b class="qq">1. 这个阶段的患者还能活多久？</b>预期生存很长（如非转移性前列腺癌、早期CKD），用OS做主要终点可能要等很多年、需要非常大的样本。这时更常用能更早出现、且与长期结局相关的终点，例如MFS或肾脏复合事件。</div>
+<div class="q"><b class="qq">2. 进展后还有哪些有效治疗？对照组能不能交叉？</b>后续有效治疗越多、交叉越多，两组OS差异就越容易被冲淡。研究药物可能确实有效，但OS仍难以显著。</div>
+<div class="q"><b class="qq">3. 能不能随机？有没有合理对照？</b>能随机，才可以比较两组的时间事件终点（PFS、OS）。不能随机时（如极罕见分子亚型），只能依靠ORR这类可以归因于药物本身的指标。</div>
+<div class="q"><b class="qq">4. 事件够不够？</b>事件驱动的研究，统计效力取决于事件数，不是入组人数。单一事件太少时，常把几种临床意义相近的事件合成复合终点。</div>
+<div class="q"><b class="qq">5. 评估会不会有偏倚？监管有没有接受过这个终点？</b>开放标签研究中，研究者知道分组，可能影响影像判读。因此PFS、ORR常需要盲态独立中心审评（BICR）。同一疾病阶段已有被监管接受的先例，会显著降低终点被质疑的风险。</div>
+<h2 id="k1-cases">二、跨产品比较：同一家公司的产品为什么选了不同终点</h2>
+<div class="lead">把几个产品放在一起看就会发现：终点跟着“要回答的问题”走，而不是跟着药走。</div>
+<div class="case"><span class="tag">MFS · 非转移性CRPC</span><div class="name">Darolutamide｜ARAMIS</div><dl><dt>研究问题</dt><dd>高风险nmCRPC（PSA倍增时间≤10个月）患者，在ADT基础上加用darolutamide，能否推迟出现转移？</dd><dt>为什么选MFS</dt><dd>患者尚无远处转移，生存期长。等OS需要很长时间，而且进展后会用到其他有效治疗。出现远处转移是这一阶段最关键的临床转折，MFS能更早体现获益。</dd><dt>结果</dt><dd>MFS中位40.4 vs 18.4个月，HR 0.41（95% CI 0.34–0.50）。最终分析OS HR 0.69（95% CI 0.53–0.88），即使有170名安慰剂组患者在揭盲后交叉到darolutamide，OS仍然显著。</dd></dl></div>
+<div class="case"><span class="tag">OS · 转移性激素敏感性</span><div class="name">Darolutamide｜ARASENS</div><dl><dt>研究问题</dt><dd>在当时的强化标准治疗“ADT + docetaxel”之上，再加darolutamide，能否让患者活得更久？</dd><dt>为什么选OS</dt><dd>这是一个“三联对二联”的加法问题，对照组本身已经很强，增加一个药物会带来更多治疗负担。要说服监管和临床改变实践，最有力的是生存获益。</dd><dt>结果</dt><dd>1,305人；OS HR 0.68（95% CI 0.57–0.80）。</dd></dl></div>
+<div class="case"><span class="tag">rPFS · 转移性激素敏感性</span><div class="name">Darolutamide｜ARANOTE</div><dl><dt>研究问题</dt><dd>不使用docetaxel时，darolutamide + ADT是否优于ADT？</dd><dt>为什么选rPFS</dt><dd>同类雄激素受体抑制剂在这一人群中已有OS证据，且rPFS读出更快、样本量更小，较少受后续治疗干扰。</dd><dt>结果</dt><dd>669人；rPFS HR 0.54。</dd></dl></div>
+<div class="case"><span class="tag">ORR + DOR · 单臂</span><div class="name">Larotrectinib｜LOXO-TRK-14001、SCOUT、NAVIGATE</div><dl><dt>研究问题</dt><dd>在跨多个癌种、但每个癌种中都极罕见的NTRK融合患者中，药物是否有确定的抗肿瘤作用？</dd><dt>为什么选ORR</dt><dd>按癌种逐个做随机研究几乎不可能。实体瘤很少自发缩小，所以高比例、持久的肿瘤缓解可以归因于药物。</dd><dt>结果</dt><dd>2018年加速批准基于55例：ORR 75%。2025年完全批准时扩大到339例：ORR 60%，中位DOR 43.3个月。</dd></dl></div>
+<div class="case"><span class="tag">复合终点 · 心肾代谢</span><div class="name">Finerenone｜FIDELIO-DKD 与 FIGARO-DKD</div><dl><dt>研究问题</dt><dd>2型糖尿病合并CKD患者中，finerenone能否减少肾脏结局和心血管结局？</dd><dt>为什么选复合终点</dt><dd>单一的“肾衰竭”或“心血管死亡”事件太少，研究需要很长时间。把临床意义相近的事件组合起来，事件数才足够。</dd><dt>结果</dt><dd>FIDELIO肾脏复合终点（肾衰竭、eGFR持续下降≥40%、肾性死亡）HR 0.82。FIGARO心血管复合终点HR 0.87，主要由心衰住院减少驱动（HR 0.71）。</dd></dl></div>
+<div class="case"><span class="tag">OS · 放射性药物</span><div class="name">Radium-223｜ALSYMPCA</div><dl><dt>研究问题</dt><dd>症状性骨转移mCRPC中，骨靶向的alpha放射性药物是否不仅减少骨事件，还能延长生存？</dd><dt>为什么选OS</dt><dd>当时的骨靶向药物能减少骨事件，但没有被证明能延长生存。只有OS才能把这个产品定位为“改变疾病结局”。</dd><dt>结果</dt><dd>OS 14.9 vs 11.3个月，HR 0.70；期中分析跨过疗效边界后提前停止。</dd></dl></div>
+<h2 id="k1-deep">三、按问题深入</h2>
+<h3>Q1｜OS被称为“金标准”，为什么不总用它做主要终点？</h3>
+<div class="lead">OS没有判读偏倚、临床意义最直接，代价是时间、样本量和后续治疗的干扰。</div>
+<p>死亡是客观事件，不需要影像判读，也不受研究者是否知道分组影响。所以只要OS显著，监管和临床都容易接受。</p><p>但OS有三个现实代价：</p>
+<ul><li><b>需要很长随访</b>：在生存期长的疾病阶段，读出可能要很多年。</li><li><b>后续治疗会冲淡差异</b>：进展后两组患者都可能用到有效药物，OS差异被缩小。</li><li><b>交叉会进一步冲淡</b>：ARAMIS中有170名安慰剂组患者揭盲后改用darolutamide。OS仍然显著，说明获益比较稳健；但如果没有显著，也不能直接得出“对生存无效”的结论。</li></ul>
+<h3>Q2｜PFS、rPFS、MFS什么时候可以作为主要终点？</h3>
+<div class="lead">当它们能更早反映一个对患者有意义的疾病转折，并且评估方法足够可靠时。</div>
+<p>FDA 2018年肿瘤终点指南的思路是：PFS能否支持常规批准或加速批准，取决于疾病背景、效应大小、毒性和与其他治疗的比较，并不存在一条统一的规则。</p><p>使用这类终点时需要特别注意：</p>
+<ul><li><b>两组影像评估时间必须一致</b>，否则一组检查更频繁会更早发现进展。</li><li><b>开放标签研究通常需要BICR</b>来降低判读偏倚。</li><li><b>MFS的“转移”依赖影像技术</b>：ARAMIS用传统影像判定。随着PSMA PET更敏感，一部分原来“无转移”的患者会被重新分类，这会影响新研究的入组定义和终点解读。</li><li><b>PFS改善不必然带来OS改善</b>：如果毒性更大或生活质量下降，PFS获益的临床意义会受到质疑。</li></ul>
+<h3>Q3｜ORR什么时候“够用”？</h3>
+<div class="lead">ORR的价值在于“肿瘤缩小可以归因于药物”，它的局限在于无法证明比标准治疗更好。</div>
+<p>单臂研究没有对照组，无法比较时间事件终点。但实体瘤很少会自己缩小，所以如果大比例患者出现肿瘤缓解，可以合理归因于药物本身。</p><p>ORR要成为监管证据，通常还需要：</p>
+<ul><li><b>效应很大</b>：Larotrectinib早期ORR约75%，远高于这类患者使用已有疗法的预期。</li><li><b>缓解持续时间足够长</b>：DOR说明缓解不是短暂现象。</li><li><b>独立评估</b>：由BICR按RECIST 1.1判定。</li><li><b>后续确认</b>：加速批准后需要扩大样本和延长随访来确认获益。</li></ul>
+<p>样本扩大后ORR从75%变为60%，通常反映人群更广、异质性更高，不能简单理解成“药效变差”。</p>
+<h3>Q4｜复合终点怎样设计，怎样读？</h3>
+<div class="lead">复合终点的组分应该临床重要性相近、方向一致；读结果时必须拆开看每个组分。</div>
+<p>设计时需要考虑：</p>
+<ul><li><b>组分的重要性是否相近</b>：把“死亡”和“住院”放在一起时，如果结果几乎全由住院推动，就要谨慎表述。</li><li><b>替代性组分的阈值</b>：肾脏终点常用eGFR持续下降≥40%或≥57%。阈值越低，事件越多，但与真正肾衰竭的距离越远。</li><li><b>组分的预期方向</b>：如果药物减少一个组分、却增加另一个组分，整体结果可能掩盖风险。</li></ul>
+<p>FIGARO-DKD就是一个典型例子：心血管复合终点显著，但主要由心衰住院减少驱动。因此准确的说法是“降低以心衰住院为主的心血管复合事件”，而不是“降低心梗和卒中”。</p>
+<h3>Q5｜首次事件和总事件有什么区别？</h3>
+<div class="lead">只数首次事件会丢掉复发事件的信息；总事件更能反映反复住院的疾病负担。</div>
+<p>传统time-to-first-event分析只计算每名患者的第一次事件。心衰患者常反复住院，FINEARTS-HF因此把心血管死亡和总心衰事件（包括复发）作为主要终点，结果RR 0.84（95% CI 0.74–0.95）。这种设计统计效率更高，但需要使用适合复发事件的分析方法，结果也要用“事件率比”而不是“风险比”的语言解释。</p>
+<h3>Q6｜主要终点显著以后，次要终点能直接下结论吗？</h3>
+<div class="lead">只有按预设层级检验并通过的关键次要终点，才能作为确证性结论。</div>
+<p>为了控制多重比较带来的假阳性，研究会预先规定次要终点的检验顺序。ARASENS采用层级把关：前一个终点没有显著，后面的终点即使p&lt;0.05也只能作为描述性或探索性结果。读论文时要先找到这条检验链。</p>
+<h2 id="k1-traps">四、易错点</h2>
+<div class="trap"><span class="x">✗</span> “PFS显著，说明药物延长了生存。”<br><span class="ok">✓</span> PFS显著只说明推迟了进展或死亡；OS需要单独证明。</div>
+<div class="trap"><span class="x">✗</span> “HR 0.70表示生存时间延长了30%。”<br><span class="ok">✓</span> HR描述的是任一时间点的事件风险之比，不是生存时间的比例。中位时间要单独看。</div>
+<div class="trap"><span class="x">✗</span> “复合终点显著，说明每个组分都降低了。”<br><span class="ok">✓</span> 要拆开看是哪一个组分在推动结果，其他组分可能没有差异。</div>
+<div class="trap"><span class="x">✗</span> “单臂研究ORR很高，说明比标准治疗好。”<br><span class="ok">✓</span> 单臂研究证明的是药物有活性，没有对照就不能直接证明比标准治疗更好。</div>
+<div class="trap"><span class="x">✗</span> “OS没有显著，说明药物对生存无效。”<br><span class="ok">✓</span> 可能是交叉、后续治疗或随访不足冲淡了差异，需要结合研究设计判断。</div>
+<div class="remember"><small>记住这一句</small>主要终点不是选“最好的指标”，而是选在这个疾病阶段、这个对照下，最能可靠回答注册问题的那一个。</div>
+<h2 id="k1-en">五、Key English</h2>
+<div class="term"><b>overall survival (OS)</b><span class="zh">总生存期</span><div class="use">从随机到任何原因死亡的时间。</div><div class="ex">The study met its primary endpoint of overall survival.</div></div>
+<div class="term"><b>radiographic progression-free survival (rPFS)</b><span class="zh">影像学无进展生存期</span><div class="use">影像进展或死亡，以先发生者为准。</div><div class="ex">rPFS was assessed by blinded independent central review.</div></div>
+<div class="term"><b>metastasis-free survival (MFS)</b><span class="zh">无转移生存期</span><div class="use">出现远处转移或死亡。</div><div class="ex">MFS is an accepted endpoint in nmCRPC.</div></div>
+<div class="term"><b>duration of response (DOR)</b><span class="zh">缓解持续时间</span><div class="use">从首次确认缓解到进展或死亡。</div><div class="ex">Responses were durable, with a median DOR of 43.3 months.</div></div>
+<div class="term"><b>composite endpoint</b><span class="zh">复合终点</span><div class="use">多个事件中任一先发生即计为事件。</div><div class="ex">The result was driven mainly by fewer hospitalizations for heart failure.</div></div>
+<div class="term"><b>event-driven</b><span class="zh">事件驱动</span><div class="use">达到预定事件数后进行分析。</div><div class="ex">The final analysis was triggered after 437 events.</div></div>
+<div class="term"><b>dilute the OS effect</b><span class="zh">冲淡OS差异</span><div class="use">交叉或后续治疗使组间差异缩小。</div><div class="ex">Crossover may have diluted the OS effect.</div></div>
+<div class="term"><b>hierarchical testing</b><span class="zh">层级检验</span><div class="use">按预设顺序检验，控制总体I类错误。</div><div class="ex">Secondary endpoints were tested hierarchically.</div></div>
+<h2 id="k1-quiz">六、自测</h2>
+<details class="quiz"><summary>1. 为什么ARAMIS没有用OS做主要终点？</summary><div>nmCRPC患者生存期长，进展后又有其他有效治疗。以OS为主要终点需要很长时间，并会被后续治疗冲淡。MFS能更早反映“推迟进入转移阶段”这一关键获益。</div></details>
+<details class="quiz"><summary>2. ARASENS和ARANOTE都在mHSPC，为什么主要终点不同？</summary><div>ARASENS回答的是在ADT+docetaxel之上加药能否延长生存，需要OS支持三联治疗；ARANOTE回答不用化疗时的双联价值，在同类药物已有OS证据的背景下，rPFS可以更快读出并支持标签扩展。</div></details>
+<details class="quiz"><summary>3. Larotrectinib用单臂ORR获批，需要满足哪些条件？</summary><div>人群极罕见、无法逐癌种随机；效应很大且持久；由独立中心审评；实体瘤很少自发缩小，缓解可以归因于药物；加速批准后通过扩大样本和随访进行确认。</div></details>
+<details class="quiz"><summary>4. FIGARO-DKD心血管复合终点显著，能说它“降低心梗风险”吗？</summary><div>不能。结果主要由心衰住院减少驱动，应拆开组分分别看，不能把整体结果套到每一个组分上。</div></details>
+<h2 id="k1-src">七、公开资料来源</h2>
+<ul class="src"><li>FDA. Clinical Trial Endpoints for the Approval of Cancer Drugs and Biologics, Guidance for Industry, December 2018.</li><li>Fizazi K, et al. Darolutamide in nonmetastatic, castration-resistant prostate cancer (ARAMIS). NEJM 2019；最终OS分析 NEJM 2020.</li><li>Smith MR, et al. Darolutamide and survival in metastatic, hormone-sensitive prostate cancer (ARASENS). NEJM 2022.</li><li>Saad F, et al. ARANOTE. Journal of Clinical Oncology 2024.</li><li>FDA：VITRAKVI 2018年加速批准公告与2025年完全批准信息；Drilon A, et al. NEJM 2018.</li><li>Bakris GL, et al. FIDELIO-DKD. NEJM 2020；Pitt B, et al. FIGARO-DKD. NEJM 2021；Solomon SD, et al. FINEARTS-HF. NEJM 2024.</li><li>Parker C, et al. Alpha emitter radium-223 and survival in metastatic prostate cancer (ALSYMPCA). NEJM 2013.</li></ul></article><div class="pager"><label for="t-k2"><span>下一篇</span>单臂研究什么时候足以支持上市</label></div></section>
+
+<section class="page" id="p-k2"><label class="back" for="t-knowledge">← 返回专业知识</label><article><h1>单臂研究什么时候足以支持上市</h1><div class="meta">案例：Larotrectinib · Darolutamide · Finerenone｜整理：2026年11月</div>
+<div class="key"><h3>先记住三条结论</h3><ol><li><b>单臂研究证明的是“药物有活性”，不是“比标准治疗更好”。</b>它能支持上市，前提是这个“活性”本身足以说明患者获益，而且没有可行的随机对照。</li><li><b>四个条件缺一不可：</b>人群罕见或无法随机、效应大到不可能是自然病程、终点能直接归因于药物（通常是ORR）、缓解持久且由独立审评确认。</li><li><b>单臂上市几乎总是“附条件”的。</b>FDA加速批准、EMA附条件上市、NMPA附条件批准，都要求上市后继续确认。监管趋势是越来越倾向随机研究，单臂是例外而不是捷径。</li></ol></div>
+<div class="toc"><b>本文目录</b><a href="#k2-f">一、判断框架：单臂研究能不能“够”</a><a href="#k2-c">二、跨产品比较：为什么有的产品能单臂，有的必须随机</a><a href="#k2-d">三、按问题深入</a><a href="#k2-t">四、易错点</a><a href="#k2-en">五、Key English</a><a href="#k2-qz">六、自测</a><a href="#k2-s">七、公开资料来源</a></div>
+<h2 id="k2-f">一、判断框架：单臂研究能不能“够”</h2><div class="lead">先问“没有对照组，我们靠什么相信这个结果”，答案越具体，单臂研究越站得住。</div>
+<div class="q"><b class="qq">1. 能不能随机？</b>如果目标人群可以按合理时间入组、存在可接受的对照治疗，监管通常会要求随机。单臂研究常见于极罕见分子亚型、儿童罕见肿瘤，或已经没有标准治疗的末线患者。</div>
+<div class="q"><b class="qq">2. 结果能不能归因于药物？</b>实体瘤很少自发缩小，所以肿瘤缓解（ORR）可以归因于药物。相反，PFS、OS这类时间事件终点在没有对照时无法解释：病程长短本身就因人而异。</div>
+<div class="q"><b class="qq">3. 效应有多大？</b>效应必须远大于已有治疗或自然病程的预期。缓解率只比历史数据好一点，单臂研究就无法区分真实疗效和患者选择偏差。</div>
+<div class="q"><b class="qq">4. 缓解持久吗？由谁判定？</b>短暂缓解的临床意义有限，需要用DOR证明。开放标签研究中研究者知道患者在用药，所以ORR通常要由盲态独立中心审评（BICR）确认。</div>
+<div class="q"><b class="qq">5. 上市后怎样确认？</b>确认性研究最好在批准时已经在进行。FDA 2022年的立法修订（FDORA）进一步授权FDA在批准前要求确认性研究已经启动。</div>
+<h2 id="k2-c">二、跨产品比较：为什么有的产品能单臂，有的必须随机</h2><div class="lead">同一家公司的产品放在一起看，决定研究形式的是疾病和证据问题，而不是公司偏好。</div>
+<div class="case"><span class="tag">单臂 · 足以支持上市</span><div class="name">Larotrectinib｜三项单臂研究汇总</div><dl><dt>为什么可以单臂</dt><dd>NTRK融合在大多数常见肿瘤中极罕见，按癌种逐个随机几乎不可能；实体瘤很少自发缩小，高缓解率可以归因于药物。</dd><dt>证据强度</dt><dd>2018年加速批准基于55例：ORR 75%（CR 22%，PR 53%），跨12种癌症，由独立审评判定。</dd><dt>上市后</dt><dd>2025年扩大到339例、更长随访后转为完全批准：ORR 60%，中位DOR 43.3个月。</dd></dl></div>
+<div class="case"><span class="tag">必须随机</span><div class="name">Darolutamide｜ARAMIS（nmCRPC）</div><dl><dt>为什么不能单臂</dt><dd>研究问题是“推迟转移”。患者尚无可测量病灶，没有“肿瘤缩小”可看；转移出现的时间本身因人而异，没有对照组就无法判断是否被推迟。</dd><dt>结果</dt><dd>2:1随机、双盲、安慰剂对照，1,509人；MFS HR 0.41。</dd></dl></div>
+<div class="case"><span class="tag">必须随机</span><div class="name">Finerenone｜FIDELIO-DKD</div><dl><dt>为什么不能单臂</dt><dd>肾衰竭、心血管事件在糖尿病CKD人群中会自然发生，药物效应是“事件少一些”，而不是“事件消失”。只有与安慰剂同期比较才能看出差异。</dd><dt>结果</dt><dd>5,734人，事件驱动；肾脏复合终点HR 0.82。</dd></dl></div>
+<div class="case"><span class="tag">小样本但仍然随机</span><div class="name">Finerenone｜FINE-ONE（1型糖尿病CKD）</div><dl><dt>启示</dt><dd>只有242人、6个月、以UACR为主要终点，但仍然是随机、双盲、安慰剂对照。“样本小”不等于“只能单臂”：只要能随机，即使小研究也会选择随机。</dd></dl></div>
+<h2 id="k2-d">三、按问题深入</h2>
+<h3>Q1｜为什么ORR可以在单臂研究中“自己说话”，PFS不行？</h3><div class="lead">ORR测的是一个几乎不会自然发生的变化；PFS测的是一个一定会自然发生的事件的时间。</div><p>晚期实体瘤在没有有效治疗时，通常会继续增长，自发缩小到RECIST部分缓解（直径总和减少≥30%）的情况非常少。所以如果多数患者肿瘤明显缩小，最合理的解释就是药物起效。</p><p>而进展终会发生，问题只是早晚。单臂研究中的中位PFS是10个月，到底算好还是不好，取决于这些患者原本会在多久进展，而这需要可比的对照组才能回答。用历史数据或外部对照代替，容易受患者选择、检查频率和时代变化的影响。</p>
+<h3>Q2｜效应要多大才够？</h3><div class="lead">没有统一数字，但“远超已有治疗、且在多个亚组中一致”是最核心的特征。</div><p>FDA 2023年发布的加速批准试验设计指南草案指出，随机研究是支持加速批准的首选方法，因为它能更稳健地评估疗效和安全性，并直接与现有治疗比较；该指南同时讨论了单臂研究是否充分的考虑因素。实践中被接受的单臂研究，通常具备：缓解率显著高于可用疗法、缓解持久、对患者有临床意义的安全性，以及清楚描述的目标人群。</p><p>Larotrectinib的说服力还来自“跨癌种一致性”：不同组织来源的肿瘤，只要有NTRK融合，都出现高缓解。这种一致性很难用偶然或选择偏差解释。</p>
+<h3>Q3｜为什么单臂上市后还要“确认”？</h3><div class="lead">加速批准依据的是“很可能预测临床获益”的终点，上市后要证明这种获益真实存在。</div><p>FDA加速批准、EMA附条件上市许可（conditional marketing authorisation）和NMPA附条件批准，逻辑相似：允许在证据尚不完整时让患者更早获得药物，但要求申请人按约定完成后续研究。如果确认失败，适应症可能被撤回。近年FDA通过“Project Confirm”公开肿瘤加速批准的确认进展，并撤回过一批未能确认获益的肿瘤适应症。</p><p>确认可以有两种形式：另做一项随机研究，或像Larotrectinib这样，在罕见人群中继续扩大单臂数据、延长随访，证明缓解持久且在更大样本中仍然成立。</p>
+<h3>Q4｜外部对照（external control）能否替代随机对照？</h3><div class="lead">外部对照能提供背景，但很难消除偏倚，监管通常只把它作为支持性证据。</div><p>外部对照来自历史研究、真实世界数据或自然病史研究。主要问题是：入组标准不同、评估时间和方法不同、标准治疗随时代变化，以及未测量的混杂因素。即使使用倾向评分等统计方法，也只能平衡已测量的变量。因此在罕见病和儿童研究中，外部对照常用于说明“这类患者通常会怎样”，而不是作为主要比较。</p>
+<h3>Q5｜单臂研究的安全性证据为什么也是一个问题？</h3><div class="lead">没有对照组，就很难区分不良事件是药物引起的，还是疾病本身的表现。</div><p>在晚期肿瘤患者中，乏力、贫血、肝功能异常可能来自疾病或既往治疗。单臂研究只能描述发生率，较难估计药物导致的增量风险。罕见不良反应还可能因样本小而未被发现，这也是上市后需要持续收集安全数据的原因。Larotrectinib完全批准时，安全性数据库扩大到444人。</p>
+<h2 id="k2-t">四、易错点</h2>
+<div class="trap"><span class="x">✗</span> 单臂研究ORR 75%，说明比化疗好。<br><span class="ok">✓</span> 单臂研究没有对照，只能说明药物有活性；与其他治疗的比较需要随机研究或谨慎的间接比较。</div>
+<div class="trap"><span class="x">✗</span> 样本小，所以只能做单臂。<br><span class="ok">✓</span> 能否随机取决于人群和对照是否可行，不是样本大小。FINE-ONE只有242人，仍然是随机研究。</div>
+<div class="trap"><span class="x">✗</span> 加速批准就是完全批准的一种。<br><span class="ok">✓</span> 加速批准附带确认义务，确认失败可能撤回适应症。</div>
+<div class="trap"><span class="x">✗</span> ORR从75%降到60%，说明药效变差了。<br><span class="ok">✓</span> 早期小样本往往人群更集中；扩大到更多癌种和更复杂病史后，缓解率下降是常见现象。关键看是否仍有临床意义、缓解是否持久。</div>
+<div class="remember"><small>记住这一句</small>单臂研究能支持上市，靠的不是“样本够不够大”，而是“没有对照也能确定是药物在起作用”。</div>
+<h2 id="k2-en">五、Key English</h2>
+<div class="term"><b>single-arm trial</b><span class="zh">单臂试验</span><div class="use">所有受试者接受同一研究治疗。</div><div class="ex">The approval was based on pooled data from three single-arm trials.</div></div>
+<div class="term"><b>accelerated approval</b><span class="zh">加速批准（FDA）</span><div class="use">基于可能预测获益的终点提前批准。</div><div class="ex">Continued approval may be contingent upon verification of clinical benefit.</div></div>
+<div class="term"><b>conditional marketing authorisation</b><span class="zh">附条件上市许可（EMA）</span><div class="use">证据尚不完整但获益大于风险时授予。</div><div class="ex">The product received a conditional marketing authorisation.</div></div>
+<div class="term"><b>confirmatory trial</b><span class="zh">确证性研究</span><div class="use">上市后用于确认临床获益。</div><div class="ex">The confirmatory trial should be underway at the time of approval.</div></div>
+<div class="term"><b>external control</b><span class="zh">外部对照</span><div class="use">来自研究外部的对照数据。</div><div class="ex">External control data were considered supportive only.</div></div>
+<div class="term"><b>magnitude of effect</b><span class="zh">效应大小</span><div class="use">结果超出预期的程度。</div><div class="ex">The magnitude of effect was substantially greater than available therapy.</div></div>
+<div class="term"><b>durable response</b><span class="zh">持久缓解</span><div class="use">缓解维持时间足够长。</div><div class="ex">Responses were durable across tumor types.</div></div>
+<h2 id="k2-qz">六、自测</h2>
+<details class="quiz"><summary>1. 为什么ARAMIS不可能用单臂研究支持上市？</summary><div>ARAMIS研究的是非转移性患者的“推迟转移”。这些患者没有可测量病灶，无法看ORR；转移出现时间因人而异，没有同期对照就无法判断是否被推迟。</div></details>
+<details class="quiz"><summary>2. 一个新药在某常见癌症末线治疗中单臂ORR 30%，现有疗法约20%。能否靠单臂上市？</summary><div>很困难。效应只比现有疗法略高，可能受患者选择和评估差异影响；人群也不罕见，可以随机。通常需要随机研究。</div></details>
+<details class="quiz"><summary>3. 加速批准后确认研究有哪两种常见方式？</summary><div>另做一项随机研究；或者在罕见人群中扩大单臂数据并延长随访，证明结果在更大样本中成立、缓解持久。</div></details>
+<details class="quiz"><summary>4. 外部对照的主要局限是什么？</summary><div>入组标准、评估方法和时间不同，标准治疗随时代变化，以及无法平衡未测量的混杂因素。</div></details>
+<h2 id="k2-s">七、公开资料来源</h2><ul class="src"><li>FDA. Clinical Trial Considerations to Support Accelerated Approval of Oncology Therapeutics. Draft Guidance, March 2023.</li><li>FDA. Clinical Trial Endpoints for the Approval of Cancer Drugs and Biologics. Guidance, December 2018.</li><li>FDA：VITRAKVI 2018年加速批准公告；2025年完全批准信息与说明书。</li><li>EMA. Vitrakvi EPAR.</li><li>Fizazi K, et al. ARAMIS. NEJM 2019.</li><li>Bakris GL, et al. FIDELIO-DKD. NEJM 2020；Bayer：FINE-ONE结果新闻稿（2025年11月）。</li></ul></article><div class="pager"><label for="t-k1"><span>上一篇</span>主要终点怎样选择：OS、PFS、ORR、MFS与复合终点</label><label for="t-k3"><span>下一篇</span>怎样读懂生存分析结果：KM曲线、HR、95% CI和期中分析</label></div></section>
+
+<section class="page" id="p-k3"><label class="back" for="t-knowledge">← 返回专业知识</label><article><h1>怎样读懂生存分析结果：KM曲线、HR、95% CI和期中分析</h1><div class="meta">案例：ARAMIS · FIGARO-DKD · ALSYMPCA · ERA-223｜整理：2026年11月</div>
+<div class="key"><h3>先记住三条结论</h3><ol><li><b>KM曲线看的是“随时间还有多少人没发生事件”</b>，中位时间只是曲线上一个点。两条曲线什么时候分开、分开多大、后来是否靠近，比单一的中位数更有信息。</li><li><b>HR是事件风险的相对比较，不是生存时间的比例。</b>HR 0.70的意思是：在随访期间任一时点，试验组发生事件的风险约为对照组的70%。</li><li><b>95% CI决定结论有多确定</b>：CI不包含1才说明有统计学差异；CI的宽度说明估计有多精确。期中分析提前停止的研究，效应常被高估，要看预设边界和后续更新。</li></ol></div>
+<div class="toc"><b>本文目录</b><a href="#k3-f">一、判断框架：读一张生存结果的5个步骤</a><a href="#k3-c">二、跨产品比较：同样是HR，怎样读出不同的含义</a><a href="#k3-d">三、按问题深入</a><a href="#k3-t">四、易错点</a><a href="#k3-en">五、Key English</a><a href="#k3-qz">六、自测</a><a href="#k3-s">七、公开资料来源</a></div>
+<h2 id="k3-f">一、判断框架：读一张生存结果的5个步骤</h2><div class="lead">先看人数和事件，再看曲线，最后才看HR和p值。</div>
+<div class="q"><b class="qq">1. 每组多少人、发生了多少事件？</b>生存分析的统计效力来自事件数。一项1,000人的研究如果只有100个事件，结论可能不如500人、300个事件的研究稳健。</div>
+<div class="q"><b class="qq">2. 曲线什么时候分开？</b>早期分开说明起效快；后期才分开可能是延迟效应；先分开后靠拢，可能提示获益不持久或后续治疗冲淡了差异。</div>
+<div class="q"><b class="qq">3. 曲线尾部可信吗？</b>KM曲线下方通常列有“风险人数（number at risk）”。尾部剩下的人很少时，曲线的每一次下降都可能被放大，不应过度解读。</div>
+<div class="q"><b class="qq">4. HR和95% CI说了什么？</b>HR给出相对风险的点估计，CI给出合理的范围。CI上限接近1，说明获益可能很小；CI很宽，说明估计不精确。</div>
+<div class="q"><b class="qq">5. 这是哪一次分析？</b>期中分析、主要分析还是最终分析？对照组有没有交叉？是否按预设的检验顺序和alpha分配？</div>
+<h2 id="k3-c">二、跨产品比较：同样是HR，怎样读出不同的含义</h2><div class="lead">几个真实结果放在一起，可以看到“显著”“不显著”“提前停止”“方向不利”分别是什么样子。</div>
+<div class="case"><span class="tag">明确且精确的获益</span><div class="name">ARAMIS｜MFS</div><dl><dt>结果</dt><dd>HR 0.41（95% CI 0.34–0.50）；中位40.4 vs 18.4个月。</dd><dt>怎样读</dt><dd>CI整体远离1，而且很窄，说明效应大且估计精确。中位时间差22个月，与HR方向一致。</dd></dl></div>
+<div class="case"><span class="tag">交叉之后的OS</span><div class="name">ARAMIS｜最终OS</div><dl><dt>结果</dt><dd>HR 0.69（95% CI 0.53–0.88）；170名安慰剂组患者在主要分析揭盲后交叉。</dd><dt>怎样读</dt><dd>交叉会冲淡差异，因此真实的生存效应可能比0.69更好。这里OS仍显著，说明获益稳健。</dd></dl></div>
+<div class="case"><span class="tag">显著但接近1</span><div class="name">FIGARO-DKD｜心血管复合终点</div><dl><dt>结果</dt><dd>HR 0.87（95% CI 0.76–0.98）。</dd><dt>怎样读</dt><dd>统计学显著，但CI上限0.98接近1，相对风险降低的合理范围从约2%到24%。要结合事件率和组分来判断临床意义。</dd></dl></div>
+<div class="case"><span class="tag">点估计有利但不显著</span><div class="name">FIGARO-DKD｜肾脏复合次要终点</div><dl><dt>结果</dt><dd>HR 0.87（95% CI 0.76–1.01）。</dd><dt>怎样读</dt><dd>CI包含1，不能下结论说有差异；但这也不等于证明“没有作用”。点估计和FIDELIO方向一致，因此后来通过预设的FIDELITY汇总分析进一步评估。</dd></dl></div>
+<div class="case"><span class="tag">期中分析提前停止</span><div class="name">Radium-223｜ALSYMPCA</div><dl><dt>结果</dt><dd>OS 14.9 vs 11.3个月，HR 0.70（95% CI 0.58–0.83）；期中分析跨过疗效边界后，独立数据监查委员会建议停止，安慰剂组可交叉。</dd><dt>怎样读</dt><dd>提前停止的研究容易高估效应，所以后续更新分析很重要；随后公布的更新数据与期中结果一致。</dd></dl></div>
+<div class="case"><span class="tag">方向不利</span><div class="name">Radium-223｜ERA-223</div><dl><dt>结果</dt><dd>中位OS 30.7 vs 33.3个月，HR 1.195；骨折发生率28.6% vs 11.4%。</dd><dt>怎样读</dt><dd>HR&gt;1表示试验组风险更高。即使OS差异本身未达到预设显著性，配合骨折的明显增加，也足以构成重要安全信号，并触发监管再评价。</dd></dl></div>
+<h2 id="k3-d">三、按问题深入</h2>
+<h3>Q1｜KM曲线是怎样画出来的？“删失”是什么？</h3><div class="lead">KM曲线每遇到一个事件就向下走一步；没发生事件就离开研究的人被“删失”，不当作事件，也不再计入之后的风险人数。</div><p>删失（censoring）通常发生在：研究截止时仍未发生事件、失访、或按预设规则在开始新治疗时停止计算。删失的处理方式会影响结果，所以方案和SAP需要预先定义删失规则。</p><p>如果删失与预后有关（例如病情变差的患者更容易失访），KM估计就可能出现偏倚。这就是为什么高质量研究要尽量减少失访，并做敏感性分析。</p>
+<h3>Q2｜HR到底是什么意思？</h3><div class="lead">HR是两组瞬时事件风险之比，假设这个比例在整个随访期间大致不变。</div><p>HR 0.70表示：在任一时间点，尚未发生事件的试验组患者，其近期发生事件的风险约为对照组的70%，也常说成“风险降低30%”。</p><p>它不能直接换算成“多活30%的时间”。中位生存期的差异需要单独看，而且取决于基线风险。同样的HR，在高风险人群中对应的绝对获益通常更大。</p>
+<h3>Q3｜曲线交叉时，HR还有意义吗？</h3><div class="lead">比例风险假设不成立时，单一HR可能掩盖“早期不利、后期有利”这类变化。</div><p>免疫治疗和部分组合治疗中，曲线可能早期重叠甚至交叉，后期才分开。此时只报告一个HR不够，研究常补充里程碑生存率（如2年生存率）或限制性平均生存时间（RMST），描述在某段时间内平均多活了多久。</p>
+<h3>Q4｜95% CI怎样读？p值和CI是什么关系？</h3><div class="lead">CI不含1，大致对应p&lt;0.05；CI的位置和宽度提供了p值没有的信息。</div><p>读CI时问两件事：一是上下限是否都在有临床意义的范围内；二是区间宽不宽。FIDELIO肾脏终点HR 0.82（0.73–0.93）和FIGARO心血管终点HR 0.87（0.76–0.98）都显著，但前者上限离1更远，结论更稳。</p>
+<h3>Q5｜期中分析为什么能提前停止？为什么效应可能被高估？</h3><div class="lead">期中分析用更严格的边界控制假阳性；越早停止，越可能恰好停在“结果看起来最好”的时候。</div><p>事件驱动研究会预设在某个事件比例时做期中分析。为了避免多次查看数据增加假阳性，常用O'Brien-Fleming等alpha消耗方法：早期边界很严格，后期逐渐放宽。期中分析由独立数据监查委员会（IDMC/DMC）在盲态外进行，申办方研究团队保持盲态。</p><p>研究在跨越疗效边界时停止，这个时刻往往伴随随机波动带来的偏高估计。因此提前停止后的更新分析或更长随访，是检验结果是否稳健的重要依据。</p>
+<h3>Q6｜交叉怎样影响OS？</h3><div class="lead">对照组改用研究药物后，两组OS会靠近，常规ITT分析会低估药物的真实生存效应。</div><p>ITT分析按随机分组比较，保留随机化的可比性，所以仍是主要分析。为了估计“如果没有交叉”的效应，研究可做RPSFT或IPCW等调整分析，但这些方法依赖较强假设，通常只作为支持性结果。</p>
+<h2 id="k3-t">四、易错点</h2>
+<div class="trap"><span class="x">✗</span> HR 0.70，说明中位生存延长了30%。<br><span class="ok">✓</span> HR是风险之比，不是时间之比；中位时间需要单独看。</div>
+<div class="trap"><span class="x">✗</span> p&gt;0.05，说明两组没有差别。<br><span class="ok">✓</span> 不显著只说明没有足够证据证明差异，不等于证明没有差异。看CI可以知道可能的效应范围。</div>
+<div class="trap"><span class="x">✗</span> KM曲线尾部差距很大，说明长期获益巨大。<br><span class="ok">✓</span> 尾部风险人数可能很少，估计不稳定，需要结合number at risk判断。</div>
+<div class="trap"><span class="x">✗</span> 提前停止的研究结果最可靠。<br><span class="ok">✓</span> 提前停止在伦理上合理，但效应可能被高估，要看后续更新。</div>
+<div class="remember"><small>记住这一句</small>读生存结果的顺序是：事件数 → 曲线形状 → HR和CI → 分析时点和交叉，最后才是p值。</div>
+<h2 id="k3-en">五、Key English</h2>
+<div class="term"><b>Kaplan–Meier curve</b><span class="zh">KM生存曲线</span><div class="use">描述随时间仍未发生事件的比例。</div><div class="ex">The Kaplan–Meier curves separated early and remained separated.</div></div>
+<div class="term"><b>censoring</b><span class="zh">删失</span><div class="use">在发生事件前离开观察。</div><div class="ex">Patients without an event were censored at the last assessment.</div></div>
+<div class="term"><b>number at risk</b><span class="zh">风险人数</span><div class="use">某一时点仍在观察中的人数。</div><div class="ex">Interpret the tail with caution given the small number at risk.</div></div>
+<div class="term"><b>hazard ratio (HR)</b><span class="zh">风险比</span><div class="use">两组瞬时事件风险之比。</div><div class="ex">The hazard ratio was 0.70 (95% CI, 0.58 to 0.83).</div></div>
+<div class="term"><b>proportional hazards</b><span class="zh">比例风险假设</span><div class="use">HR在随访期间大致恒定。</div><div class="ex">The proportional hazards assumption may not hold.</div></div>
+<div class="term"><b>interim analysis</b><span class="zh">期中分析</span><div class="use">研究结束前预设的分析。</div><div class="ex">The study was stopped early after crossing the prespecified efficacy boundary.</div></div>
+<div class="term"><b>alpha spending</b><span class="zh">alpha消耗</span><div class="use">多次分析时分配I类错误。</div><div class="ex">An O'Brien-Fleming alpha-spending function was used.</div></div>
+<div class="term"><b>restricted mean survival time (RMST)</b><span class="zh">限制性平均生存时间</span><div class="use">一段时间内的平均无事件时间。</div><div class="ex">RMST was reported as a supportive analysis.</div></div>
+<h2 id="k3-qz">六、自测</h2>
+<details class="quiz"><summary>1. HR 0.87（95% CI 0.76–1.01）应怎样表述？</summary><div>未显示统计学显著差异，点估计提示风险可能降低，但CI包含1，不能下结论。</div></details>
+<details class="quiz"><summary>2. 为什么ARAMIS的OS HR 0.69可能低估真实效应？</summary><div>170名安慰剂组患者揭盲后交叉到darolutamide，冲淡了组间差异。</div></details>
+<details class="quiz"><summary>3. 两项研究HR都是0.80，一项CI 0.70–0.91，另一项CI 0.55–1.15，哪项更可信？</summary><div>前者：CI窄且不包含1；后者估计不精确且包含1，不能下结论。</div></details>
+<details class="quiz"><summary>4. 期中分析提前停止后，为什么还要看更新分析？</summary><div>提前停止的时点可能恰逢随机波动带来的偏高估计，更新分析可以检验效应是否稳健。</div></details>
+<h2 id="k3-s">七、公开资料来源</h2><ul class="src"><li>ICH E9 Statistical Principles for Clinical Trials；ICH E9(R1) Estimands and Sensitivity Analysis.</li><li>Fizazi K, et al. ARAMIS. NEJM 2019；最终OS分析 NEJM 2020.</li><li>Bakris GL, et al. FIDELIO-DKD. NEJM 2020；Pitt B, et al. FIGARO-DKD. NEJM 2021.</li><li>Parker C, et al. ALSYMPCA. NEJM 2013.</li><li>Smith M, et al. ERA-223. Lancet Oncology 2019.</li></ul></article><div class="pager"><label for="t-k2"><span>上一篇</span>单臂研究什么时候足以支持上市</label></div></section>
+<section class="page" id="p-workflow"><section class="hero"><div class="eyebrow">Fish · Workflow</div><h1>工作实务</h1><p>一件工作从开始到完成：流程、依赖、关键路径与常见卡点。</p><div class="count">3 篇文章</div></section><div class="list"><label class="card" for="t-w1"><span class="num">01</span><span class="txt"><span class="t">研究中心从伦理递交到首例入组</span><span class="d">伦理批准不等于可以入组；中心启动由关键路径上最慢的一项决定</span><span class="go">阅读全文 —</span></span></label><label class="card" for="t-w2"><span class="num">02</span><span class="txt"><span class="t">一份CSR从数据库锁定到定稿</span><span class="d">能提前写的越多，锁库后的关键路径越短</span><span class="go">阅读全文 —</span></span></label><label class="card" for="t-w3"><span class="num">03</span><span class="txt"><span class="t">一次监管问询怎样走到正式回复</span><span class="d">先回答机构在担心什么，再回答我们有什么证据</span><span class="go">阅读全文 —</span></span></label></div></section>
+
+<section class="page" id="p-w1"><label class="back" for="t-workflow">← 返回工作实务</label><article>
+<h1>研究中心从伦理递交到首例入组</h1>
+<div class="meta">语境：在中国开展的国际多中心注册临床试验｜整理：2026年11月</div>
+<div class="key"><h3>先记住三条结论</h3><ol>
+<li><b>伦理批准不等于可以入组。</b>它只是中心启动的前置条件之一，还需要合同、人遗备案、登记、药物与系统准备、培训，以及申办方的正式激活。</li>
+<li><b>机构立项、伦理和合同可以并行推进。</b>中心什么时候能启动，由关键路径上最慢的那一项决定，而不是由最后完成的那一项决定。</li>
+<li><b>最容易混淆的是里程碑名称。</b>SIV结束不等于中心已激活，首例知情同意不等于首例入组；在中心语境里，CTA通常指Clinical Trial Agreement（临床试验协议）。</li></ol></div>
+<div class="toc"><b>本文目录</b><a href="#w1-flow">一、主线流程：从中心确定到首例入组</a><a href="#w1-dep">二、哪些可以并行，哪些互相依赖</a><a href="#w1-cp">三、关键路径：真正决定启动时间的是什么</a><a href="#w1-block">四、常见卡点</a><a href="#w1-ms">五、容易混淆的里程碑</a><a href="#w1-en">六、Key English</a><a href="#w1-quiz">七、自测</a><a href="#w1-src">八、公开资料来源</a></div>
+<h2 id="w1-flow">一、主线流程：从中心确定到首例入组</h2>
+<div class="lead">中心启动是多条线同时推进、最后汇合到“正式激活”这一个点上，不是一条单线。</div>
+<div class="note">前提：国家层面的临床试验许可已经获得（中国为药物临床试验申请获批或默示许可）。下面讨论的是许可之后，单个研究中心怎样走到首例入组。各医院对材料和顺序的具体要求不同，以中心SOP为准。</div>
+<div class="step"><span class="no">1</span><span class="st">机构立项</span><p>向医院临床试验机构办公室递交项目资料，审核申办方资质、主要研究者（PI）资格、项目可行性和材料完整性。立项通过后，才进入医院内部的正式流程。</p></div>
+<div class="step"><span class="no">2</span><span class="st">伦理递交与审查</span><p>递交方案、知情同意书、研究者手册、招募材料等。伦理委员会按会期审查，可能给出同意、修改后同意、修改后再审或不同意。多中心研究中，参与中心可在组长单位审查基础上进行简化审查或结果认可，具体取决于各院做法。</p></div>
+<div class="step"><span class="no">3</span><span class="st">合同与预算（Clinical Trial Agreement）</span><p>常为申办方、CRO与医院的多方协议，涉及研究费用、受试者补偿、保险与损害赔偿、数据与发表、知识产权等条款。法务条款往往比预算更耗时。</p></div>
+<div class="step"><span class="no">4</span><span class="st">人类遗传资源备案或审批</span><p>为获得药品在我国上市许可、在临床机构开展的国际合作临床试验，如不涉及人遗材料出境，不需要审批，但应在试验开展前向国务院卫生健康主管部门备案拟使用的人遗种类、数量和用途；涉及材料出境等情形则适用审批。人遗管理职责已由科技部划转至国家卫生健康委，2026年11月发布了修订后的实施细则。</p><div class="dep">依赖：备案材料通常需要伦理批件、协议等文件，并要求样本种类和数量与方案、知情同意书、实验室协议一致。</div></div>
+<div class="step"><span class="no">5</span><span class="st">临床试验登记与信息公示</span><p>申请人需在CDE“药物临床试验登记与信息公示平台”登记，首次登记、提交和公示应在受试者招募前完成；新增参加机构、伦理信息等变化需要及时更新。</p></div>
+<div class="step"><span class="no">6</span><span class="st">研究药物、物资和系统准备</span><p>研究药物的进口、清关、仓储、发运和中心药房接收（含温度记录）；中心实验室试剂盒和物流；EDC、IRT、eCOA等系统账号；必要设备的校准。</p><div class="dep">依赖：很多申办方要求合同签署后才发运药物，系统账号通常在完成培训后开通。</div></div>
+<div class="step"><span class="no">7</span><span class="st">中心启动访视（SIV）</span><p>对研究团队进行方案、流程、系统、安全性报告和GCP培训，确认授权分工表（delegation log），检查中心设施和文件。</p></div>
+<div class="step"><span class="no">8</span><span class="st">正式激活</span><p>申办方按激活清单逐项确认：伦理批件、合同生效、人遗备案、登记、药物到位、培训完成、系统权限、必备文件齐全，并处理SIV遗留问题。确认后发出激活通知（有些公司内部叫green light）。</p></div>
+<div class="step"><span class="no">9</span><span class="st">筛选与首例入组</span><p>中心可以开始招募和筛选。受试者签署知情同意后进入筛选期，确认符合所有入选、排除标准后，才按方案定义入组或随机。</p></div>
+<h2 id="w1-dep">二、哪些可以并行，哪些互相依赖</h2>
+<div class="lead">能并行的尽量并行，真正要管理的是那几处“必须等前一步”的依赖。</div>
+<h3>通常可以并行</h3><ul><li>机构立项、伦理递交、合同谈判可以在中心确定后同时启动。</li><li>药物和物资的发运计划、系统配置、SIV排期可以提前准备，不必等全部批件到齐。</li></ul>
+<h3>常见的硬依赖</h3><ul><li><b>伦理 → 合同签署</b>：不少医院要求先取得伦理批件才签署合同。</li><li><b>伦理、协议 → 人遗备案</b>：备案需要这些文件作为材料。</li><li><b>合同签署 → 药物发运</b>：申办方通常不会向未签约中心发药。</li><li><b>培训 → 系统权限</b>：通常完成培训后才开通EDC、IRT账号。</li><li><b>所有前置条件 → 正式激活 → 筛选</b>。</li></ul>
+<div class="note">具体依赖关系因医院和申办方SOP而不同。项目开始时最好把每家中心的实际顺序画出来，而不是套用通用模板。</div>
+<h2 id="w1-cp">三、关键路径：真正决定启动时间的是什么</h2>
+<div class="lead">把所有依赖连起来，耗时最长的那条链就是关键路径。缩短不在这条链上的步骤，不会让中心更早启动。</div>
+<p>下面是一个<b>示意例子</b>（非真实项目数据）：</p>
+<div class="step"><span class="no">A</span><span class="st">伦理线</span><p>递交 → 等待会期 → 修改后同意：约6周。</p></div>
+<div class="step"><span class="no">B</span><span class="st">合同线</span><p>与伦理同时启动，法务条款谈判约8周；但医院要求伦理批件到手后才签字，签字流程再需2周。合同签署在第8周（谈判完成和伦理批件两者中较晚者）后2周，即约第10周。</p></div>
+<div class="step"><span class="no">C</span><span class="st">人遗备案</span><p>需要伦理批件和协议，第10周后准备并完成备案，约2周，到第12周。</p></div>
+<div class="step"><span class="no">D</span><span class="st">药物与SIV</span><p>合同签署后发运药物，约2周到达；SIV可安排在第11周。</p></div>
+<p>这个例子中，中心最早约在第12周激活。关键路径是“合同谈判 → 合同签署 → 人遗备案”。即使把SIV提前到第6周，也无法让中心更早入组；真正有效的做法是尽早启动合同谈判、提前准备人遗材料。</p>
+<p>跟进进度时，先问：<b>现在关键路径上的是哪一项？它卡在谁那里？预计什么时候解决？</b></p>
+<h2 id="w1-block">四、常见卡点</h2>
+<div class="lead">大多数延误不在审查本身，而在材料来回修改、版本不一致和等待签字。</div>
+<ul><li><b>伦理会期</b>：错过一次会期可能要多等两到四周；“修改后再审”比“修改后同意”多一轮。</li><li><b>合同法务条款</b>：损害赔偿、保险、发表权和数据使用条款常需多轮谈判。</li><li><b>预算</b>：中心对检查费用、受试者补偿、研究者费用的标准与申办方模板不一致。</li><li><b>人遗材料不一致</b>：样本种类、数量、检测机构与方案、知情同意书、实验室协议不一致，需要回头修改。</li><li><b>文件版本</b>：伦理批准的方案或ICF版本与中心培训、实际使用版本不一致。</li><li><b>研究药物</b>：进口清关、温控运输或药房接收条件不满足。</li><li><b>PI和团队时间</b>：SIV或签字安排受门诊、手术时间限制。</li></ul>
+<h2 id="w1-ms">五、容易混淆的里程碑</h2>
+<div class="trap"><span class="x">✗</span> 伦理批准了，就可以入组。<br><span class="ok">✓</span> 还需要合同、人遗、登记、药物、系统、培训和正式激活。</div>
+<div class="trap"><span class="x">✗</span> SIV做完了，中心就启动了。<br><span class="ok">✓</span> SIV只是培训和准备确认；中心要在所有前置条件满足、申办方正式激活后才能筛选。</div>
+<div class="trap"><span class="x">✗</span> 首例受试者签了知情同意，就是首例入组。<br><span class="ok">✓</span> 签署知情同意后进入筛选期，可能筛选失败。入组以方案定义为准，常指确认符合标准或完成随机。</div>
+<div class="trap"><span class="x">✗</span> 中心说的CTA就是临床试验申请。<br><span class="ok">✓</span> 在中心语境里，CTA通常是Clinical Trial Agreement（临床试验协议）；在监管语境里，才是Clinical Trial Application（临床试验申请）。</div>
+<div class="trap"><span class="x">✗</span> 最后一个完成的步骤决定了启动时间。<br><span class="ok">✓</span> 决定启动时间的是关键路径上最慢的那条依赖链。</div>
+<div class="remember"><small>记住这一句</small>跟进中心启动时，先找出关键路径上最慢的那一项，而不是平均地催每一件事。</div>
+<h2 id="w1-en">六、Key English</h2>
+<div class="term"><b>site activation</b><span class="zh">中心激活</span><div class="use">申办方确认中心可以开始筛选的正式状态。</div><div class="ex">The site is pending activation due to contract execution.</div></div>
+<div class="term"><b>critical path</b><span class="zh">关键路径</span><div class="use">决定整体完成时间的最长依赖链。</div><div class="ex">The contract is now on the critical path for activation.</div></div>
+<div class="term"><b>Clinical Trial Agreement (CTA)</b><span class="zh">临床试验协议</span><div class="use">与Clinical Trial Application区分。</div><div class="ex">The CTA has been fully executed.</div></div>
+<div class="term"><b>ethics approval letter</b><span class="zh">伦理批件</span><div class="use">伦理委员会的书面审查意见。</div><div class="ex">We received the ethics approval letter with minor conditions.</div></div>
+<div class="term"><b>HGR filing</b><span class="zh">人遗备案</span><div class="use">Human Genetic Resources filing。</div><div class="ex">HGR filing can be submitted once the ethics approval and agreement are available.</div></div>
+<div class="term"><b>Site Initiation Visit (SIV)</b><span class="zh">中心启动访视</span><div class="use">启动前的团队培训和准备确认。</div><div class="ex">The SIV was completed, but two action items remain open.</div></div>
+<div class="term"><b>first patient first visit (FPFV)</b><span class="zh">首例受试者首次访视</span><div class="use">常指首例签署知情同意或首次筛选访视，需确认项目定义。</div><div class="ex">Please confirm whether FPFV refers to consent or randomization.</div></div>
+<div class="term"><b>screen failure</b><span class="zh">筛选失败</span><div class="use">签署知情同意后经评估不符合标准。</div><div class="ex">The first consented patient was a screen failure.</div></div>
+<h2 id="w1-quiz">七、自测</h2>
+<details class="quiz"><summary>1. 某中心伦理已批准，PI希望下周开始筛选，你首先要确认什么？</summary><div>确认中心是否已经正式激活：合同是否生效、人遗备案是否完成、登记是否完成、药物和系统是否就绪、SIV遗留问题是否关闭，并以申办方的激活通知为准。</div></details>
+<details class="quiz"><summary>2. 合同还在谈判，伦理下周上会，人遗材料还没开始准备。哪一项最可能在关键路径上？</summary><div>通常是合同和人遗：人遗备案依赖伦理批件和协议，合同谈判又最耗时。应尽早推进法务条款并提前准备人遗材料，而不是等伦理批件后再开始。</div></details>
+<details class="quiz"><summary>3. 中心报告“首例已入组”，项目系统里却没有随机记录，可能是什么原因？</summary><div>中心可能把签署知情同意或进入筛选算作“入组”。需要按方案定义核对：受试者是否完成筛选并符合标准，是否已经随机。</div></details>
+<details class="quiz"><summary>4. 中心邮件里写“CTA pending”，指的是什么？</summary><div>在中心语境里通常指临床试验协议（Clinical Trial Agreement）尚未签署，而不是临床试验申请。</div></details>
+<h2 id="w1-src">八、公开资料来源</h2>
+<ul class="src"><li>国家药监局、国家卫生健康委：《药物临床试验质量管理规范》（2020年第57号公告）。</li><li>国家药监局、国家卫生健康委：《药物临床试验机构管理规定》（2019年）。</li><li>国家卫生健康委等：《涉及人的生命科学和医学研究伦理审查办法》（2023年）。</li><li>《中华人民共和国人类遗传资源管理条例》（2024年修订），第二十二条；国家卫生健康委《人类遗传资源管理条例实施细则》（2026年11月修订发布）及“国际合作临床试验备案范围和程序”。</li><li>国家药监局药审中心：《药物临床试验登记与信息公示管理规范（试行）》（2020年第9号通告）。</li><li>ICH E6(R3) Good Clinical Practice。</li></ul></article><div class="pager"><label for="t-w2"><span>下一篇</span>一份CSR从数据库锁定到定稿</label></div></section>
+
+<section class="page" id="p-w2"><label class="back" for="t-workflow">← 返回工作实务</label><article><h1>一份CSR从数据库锁定到定稿</h1><div class="meta">语境：双盲、随机Phase III研究｜整理：2026年11月</div>
+<div class="key"><h3>先记住三条结论</h3><ol><li><b>CSR不是锁库之后才开始写的。</b>报告框架、方法学章节和模板化内容在锁库前就要基本完成；锁库后真正等待的是TFL和受试者叙述。</li><li><b>决定定稿时间的通常不是“写”，而是TFL质控、受试者叙述和多轮审阅意见的整合。</b>这三项在关键路径上。</li><li><b>CSR的每个数字都必须能追溯到TFL，每个结论都必须与方案和SAP一致。</b>审阅中的冲突意见，以预设的方案和SAP为准，而不是以谁的意见更强。</li></ol></div>
+<div class="toc"><b>本文目录</b><a href="#w2-fl">一、主线流程：从末例访视到CSR签署</a><a href="#w2-dep">二、哪些可以提前，哪些必须等待</a><a href="#w2-cp">三、关键路径</a><a href="#w2-bk">四、常见卡点</a><a href="#w2-ms">五、容易混淆的里程碑</a><a href="#w2-en">六、Key English</a><a href="#w2-qz">七、自测</a><a href="#w2-s">八、公开资料来源</a></div>
+<h2 id="w2-fl">一、主线流程：从末例访视到CSR签署</h2><div class="lead">CSR的完成取决于三条线：数据线、统计线和写作线，它们在锁库后汇合。</div>
+<div class="note">下面以一项双盲、随机、事件驱动的Phase III研究为例。不同公司对“soft lock / hard lock”、审阅轮次和签署人的规定不同，以内部SOP为准。</div>
+<div class="step"><span class="no">1</span><span class="st">末例末次访视（LPLV）或达到预定事件数</span><p>事件驱动研究在达到预定事件数时确定数据截止日（data cut-off），不一定等所有患者结束随访。</p></div>
+<div class="step"><span class="no">2</span><span class="st">数据清理</span><p>完成所有CRF录入和SDV/SDR，解决关键query；中心实验室、心电图、影像、PK等外部数据完成对账；SAE数据库与临床数据库对账；AE和合并用药完成医学编码。</p></div>
+<div class="step"><span class="no">3</span><span class="st">盲态数据审核（BDRM）</span><p>在揭盲前审阅数据问题，确定重要方案偏离对分析人群的影响，确认SAP中需要在盲态下决定的处理规则。</p><div class="dep">依赖：SAP应在此之前定稿。</div></div>
+<div class="step"><span class="no">4</span><span class="st">数据库锁定与揭盲</span><p>完成签署后锁定数据库，随后揭盲并交给统计团队。锁库后修改数据需要正式解锁流程。</p></div>
+<div class="step"><span class="no">5</span><span class="st">TFL产出与质控</span><p>按SAP编程产出表格、图和列表，并进行独立编程复核（double programming）或其他QC。</p></div>
+<div class="step"><span class="no">6</span><span class="st">顶线结果（topline）</span><p>最早产出主要终点和关键安全性结果，供内部决策和必要的公开披露。</p><div class="dep">注意：上市公司可能需要按披露规则及时公告重要结果。</div></div>
+<div class="step"><span class="no">7</span><span class="st">CSR撰写</span><p>把TFL结果写入预先搭好的框架：受试者分布、基线特征、疗效、安全性、讨论与结论；同时完成死亡、SAE和其他重要事件的受试者叙述（patient narratives）。</p></div>
+<div class="step"><span class="no">8</span><span class="st">跨职能审阅与意见整合</span><p>临床、统计、安全、医学、监管、临床运营等多轮审阅；Medical Writer负责整合意见、组织冲突意见讨论。</p></div>
+<div class="step"><span class="no">9</span><span class="st">质控与定稿签署</span><p>文字与TFL逐项核对的数据QC、格式与引用检查；完成后由规定的负责人签署（如主要研究者或协调研究者、申办方医学负责人）。</p></div>
+<div class="step"><span class="no">10</span><span class="st">附录与发布</span><p>按ICH E3编排附录（方案及修订、CRF样本、受试者数据列表等），转为申报格式，进入CTD Module 5。</p></div>
+<h2 id="w2-dep">二、哪些可以提前，哪些必须等待</h2><div class="lead">凡是不依赖揭盲结果的内容，都应该在锁库前完成。</div>
+<h3>可以提前完成</h3><ul><li>CSR整体框架（shell CSR）与目录</li><li>研究设计、方法、统计方法、伦理与研究者信息等章节</li><li>受试者分布、偏离分类等的描述方式</li><li>TFL shell（表格样式）和与写作的对应关系</li><li>叙述模板、需要写叙述的事件范围</li></ul>
+<h3>必须等待</h3><ul><li>锁库 → 揭盲 → 有效性和按组比较的安全性结果</li><li>TFL质控完成 → 结果写入CSR</li><li>最终数据 → 受试者叙述定稿（可以先用盲态数据起草，但需在锁库后更新核对）</li></ul>
+<h2 id="w2-cp">三、关键路径</h2><div class="lead">锁库后几周内，决定CSR能否按时完成的，通常是TFL、叙述和意见整合三件事。</div>
+<p><b>示意例子（非真实项目数据）</b>：锁库后第2周完成主要TFL和QC；第3周出顶线结果；第4–6周写出第一稿；第7–8周跨职能审阅；第9周整合意见、出第二稿；第10–11周QC和签署。</p><p>如果需要写数百份受试者叙述，叙述往往比正文更晚完成，就会成为关键路径。缩短关键路径的有效办法是：锁库前用盲态数据起草叙述、提前确认审阅人和审阅范围、每轮审阅设定明确截止时间。</p>
+<h2 id="w2-bk">四、常见卡点</h2><div class="lead">多数延误来自数据和意见，不来自写作速度。</div>
+<ul><li><b>TFL返工</b>：发现编程错误或SAP理解不一致，需要重跑并重新QC。</li><li><b>文字与TFL不一致</b>：数字、百分比、分母不一致，在QC阶段大量返工。</li><li><b>审阅意见冲突</b>：例如临床希望强调某个亚组结果，统计认为它是探索性的。</li><li><b>结果与预期不同</b>：主要终点未达到时，如何客观表述成为讨论焦点，审阅轮次增加。</li><li><b>审阅人范围过大</b>：每个人都改全文，意见量过大且重复。</li><li><b>附录准备</b>：大量列表、CRF样本和签名页的收集与格式化。</li></ul>
+<h2 id="w2-ms">五、容易混淆的里程碑</h2>
+<div class="trap"><span class="x">✗</span> 数据库锁定就是研究结束。<br><span class="ok">✓</span> 锁库是数据固定的节点；研究的报告、申报和长期随访可能还在继续。</div>
+<div class="trap"><span class="x">✗</span> 顶线结果就是CSR的结论。<br><span class="ok">✓</span> 顶线结果是早期、有限的结果；CSR需要完整分析、讨论和QC，结论可能更细致。</div>
+<div class="trap"><span class="x">✗</span> CSR写完就可以提交。<br><span class="ok">✓</span> 还需QC、签署、附录和发布格式；进入申报前还需与综合总结（Module 2）保持一致。</div>
+<div class="trap"><span class="x">✗</span> 有人在审阅中提出新的分析，就应该加进去。<br><span class="ok">✓</span> 事后新增分析属于探索性，需要明确标注，不能替代预设分析。</div>
+<div class="remember"><small>记住这一句</small>CSR的进度在锁库前就决定了一半：能提前写的越多，锁库后的关键路径越短。</div>
+<h2 id="w2-en">六、Key English</h2>
+<div class="term"><b>database lock (DBL)</b><span class="zh">数据库锁定</span><div class="use">数据固定以支持正式分析。</div><div class="ex">The database is scheduled to lock on 15 March.</div></div>
+<div class="term"><b>blind data review meeting (BDRM)</b><span class="zh">盲态数据审核会</span><div class="use">揭盲前确定分析人群与数据处理。</div><div class="ex">Protocol deviations were classified at the BDRM.</div></div>
+<div class="term"><b>Tables, Figures and Listings (TFLs)</b><span class="zh">统计图表与列表</span><div class="use">CSR数据的直接来源。</div><div class="ex">Final TFLs are expected two weeks after unblinding.</div></div>
+<div class="term"><b>topline results</b><span class="zh">顶线结果</span><div class="use">锁库后最早的关键结果。</div><div class="ex">Topline results will be shared with the leadership team first.</div></div>
+<div class="term"><b>patient narrative</b><span class="zh">受试者叙述</span><div class="use">重要个例事件的描述。</div><div class="ex">Narratives are required for all deaths and SAEs leading to discontinuation.</div></div>
+<div class="term"><b>comment resolution</b><span class="zh">审阅意见处理</span><div class="use">整合、回复和解决审阅意见。</div><div class="ex">We will hold a comment resolution meeting on Thursday.</div></div>
+<div class="term"><b>data QC</b><span class="zh">数据质控</span><div class="use">文字与TFL逐项核对。</div><div class="ex">The data QC identified several inconsistencies in denominators.</div></div>
+<h2 id="w2-qz">七、自测</h2>
+<details class="quiz"><summary>1. 锁库前两个月，Medical Writer应完成哪些工作？</summary><div>CSR框架和目录、方法类章节、TFL shell对应、叙述模板和事件范围、审阅计划与审阅人。</div></details>
+<details class="quiz"><summary>2. 审阅中临床和统计对某个亚组的表述意见冲突，以什么为准？</summary><div>以方案和SAP的预设为准；未预设的亚组分析应标注为探索性。</div></details>
+<details class="quiz"><summary>3. 为什么叙述常成为关键路径？</summary><div>数量可能很大，需要逐例核对多个数据源，且必须在最终数据基础上定稿。</div></details>
+<h2 id="w2-s">八、公开资料来源</h2><ul class="src"><li>ICH E3 Structure and Content of Clinical Study Reports.</li><li>ICH E9 Statistical Principles for Clinical Trials.</li><li>ICH M4 Common Technical Document（Module 2、Module 5）.</li><li>ICH E6(R3) Good Clinical Practice.</li></ul></article><div class="pager"><label for="t-w1"><span>上一篇</span>研究中心从伦理递交到首例入组</label><label for="t-w3"><span>下一篇</span>一次监管问询怎样走到正式回复</label></div></section>
+
+<section class="page" id="p-w3"><label class="back" for="t-workflow">← 返回工作实务</label><article><h1>一次监管问询怎样走到正式回复</h1><div class="meta">语境：新药上市申请审评期间｜整理：2026年11月</div>
+<div class="key"><h3>先记住三条结论</h3><ol><li><b>回复监管问询，第一步不是写，而是拆题。</b>先弄清机构真正担心什么、需要什么证据、会不会影响标签，再决定谁来做什么。</li><li><b>好的回复直接回答问题，并让审评员能快速找到证据。</b>结论在前，数据与分析在后，附件位置清楚；避免只说“详见原申报第X页”。</li><li><b>时限由法规决定，关键路径通常是新增分析和跨职能对齐。</b>回复中做出的承诺会变成上市后义务，需要单独追踪。</li></ol></div>
+<div class="toc"><b>本文目录</b><a href="#w3-fl">一、主线流程：从收到问询到提交回复</a><a href="#w3-rg">二、不同地区的问询长什么样</a><a href="#w3-cp">三、关键路径</a><a href="#w3-bk">四、常见卡点</a><a href="#w3-ms">五、容易混淆的地方</a><a href="#w3-en">六、Key English</a><a href="#w3-qz">七、自测</a><a href="#w3-s">八、公开资料来源</a></div>
+<h2 id="w3-fl">一、主线流程：从收到问询到提交回复</h2><div class="lead">问询回复是一个有时限的小项目：拆题、分工、准备证据、写作、审阅、发布、提交。</div>
+<div class="step"><span class="no">1</span><span class="st">接收与登记</span><p>确认问询编号、所属申请、截止日期和回复形式；建立问题清单，每个问题有唯一编号。</p></div>
+<div class="step"><span class="no">2</span><span class="st">拆题</span><p>把每个问题拆成：机构在问什么、背后的担心是什么、需要哪类证据（已有数据、新分析、文件修订还是承诺）。</p><div class="dep">这一步决定了后续所有工作量。</div></div>
+<div class="step"><span class="no">3</span><span class="st">分工与策略会</span><p>为每个问题指定负责人（临床、统计、安全、CMC、非临床等），确定回复策略：直接回答、补充分析、修改标签，还是提出替代方案。</p></div>
+<div class="step"><span class="no">4</span><span class="st">准备证据</span><p>提取已有数据；必要时开展事后分析（需说明为探索性）；准备修订后的文件（如说明书草案、方案或报告更新）。</p></div>
+<div class="step"><span class="no">5</span><span class="st">撰写回复</span><p>每个问题按“重述问题 → 简要回答 → 支持性证据 → 附件或模块位置”组织。</p></div>
+<div class="step"><span class="no">6</span><span class="st">跨职能审阅与对齐</span><p>确认各问题之间口径一致，回复与已提交资料不矛盾；涉及标签或承诺的内容由高层审批。</p></div>
+<div class="step"><span class="no">7</span><span class="st">质控与发布</span><p>核对数字、引用和交叉引用；按电子申报要求发布（例如eCTD中的新sequence）。</p></div>
+<div class="step"><span class="no">8</span><span class="st">提交与后续追踪</span><p>按期提交；记录所有承诺事项，纳入上市后义务追踪。</p></div>
+<h2 id="w3-rg">二、不同地区的问询长什么样</h2><div class="lead">名称和时限不同，但本质都是“审评中发现证据不足，需要你补充或解释”。</div>
+<div class="case"><span class="tag">美国</span><div class="name">FDA</div><dl><dt>形式</dt><dd>审评期间的信息请求（Information Request），以及审评结束时的完全回复函（Complete Response Letter）。</dd><dt>特点</dt><dd>审评期间可能多次、较短时限地来回沟通；还可能召开会议讨论标签。</dd></dl></div>
+<div class="case"><span class="tag">欧盟</span><div class="name">EMA集中审评</div><dl><dt>形式</dt><dd>第120天问题清单（List of Questions）、第180天未决问题清单（List of Outstanding Issues）。</dd><dt>特点</dt><dd>提出问题后审评“停钟”（clock stop），申请人在约定时间内回复，之后时钟重新开始。</dd></dl></div>
+<div class="case"><span class="tag">中国</span><div class="name">NMPA药审中心（CDE）</div><dl><dt>形式</dt><dd>审评中发出补充资料通知（俗称“发补”）。</dd><dt>特点</dt><dd>《药品注册管理办法》规定申请人应在规定时限内（80日）一次性补充提交资料；补充资料期间不计入审评时限。</dd></dl></div>
+<h2 id="w3-cp">三、关键路径</h2><div class="lead">能用已有数据回答的问题很快；需要新分析、新数据或跨部门达成一致的问题决定了整体进度。</div>
+<p><b>示意例子（非真实项目数据）</b>：一份问询共20个问题，其中15个可用已有资料回答，3个需要统计新分析，2个涉及说明书修改。新分析的编程、QC和解释需要3周；说明书修改需要内部多轮审批。整体回复时间由这5个问题决定，而不是由前15个。</p><p>因此拆题时就要标记“重问题”，最早启动，并为它们安排足够的审阅时间。</p>
+<h2 id="w3-bk">四、常见卡点</h2><div class="lead">最常见的问题不是写得慢，而是没有真正回答问题。</div>
+<ul><li><b>答非所问</b>：大段重复已提交的内容，没有针对审评员的具体担心。</li><li><b>口径不一致</b>：不同问题的回复中，同一数字或结论表述不同。</li><li><b>新分析失控</b>：为回答一个问题做了大量额外分析，反而引出新问题。</li><li><b>承诺过度</b>：为了尽快通过，承诺难以完成的上市后研究。</li><li><b>审批链太长</b>：涉及标签和承诺的内容需要高层批准，时间常被低估。</li></ul>
+<h2 id="w3-ms">五、容易混淆的地方</h2>
+<div class="trap"><span class="x">✗</span> 问题越多，说明申请越有问题。<br><span class="ok">✓</span> 问询是审评的正常部分；关键在于问题是否触及获益风险的核心。</div>
+<div class="trap"><span class="x">✗</span> 回复写得越多越好。<br><span class="ok">✓</span> 审评员需要的是直接、可核对的答案；冗长回复会增加理解成本。</div>
+<div class="trap"><span class="x">✗</span> 事后分析结果好，就可以作为主要证据。<br><span class="ok">✓</span> 事后分析属于探索性，应明确标注，不能替代预设分析。</div>
+<div class="trap"><span class="x">✗</span> 承诺只是表态。<br><span class="ok">✓</span> 回复中的承诺可能成为批准条件或上市后要求，需要正式追踪和完成。</div>
+<div class="remember"><small>记住这一句</small>回复监管问询，先回答“机构在担心什么”，再回答“我们有什么证据”。</div>
+<h2 id="w3-en">六、Key English</h2>
+<div class="term"><b>information request (IR)</b><span class="zh">信息请求（FDA）</span><div class="use">审评期间的补充资料要求。</div><div class="ex">We received an IR on the exposure-response analysis.</div></div>
+<div class="term"><b>List of Questions (LoQ)</b><span class="zh">问题清单（EMA）</span><div class="use">第120天的问题清单。</div><div class="ex">Responses to the Day 120 LoQ are due in three months.</div></div>
+<div class="term"><b>clock stop</b><span class="zh">停钟</span><div class="use">申请人回复期间审评计时暂停。</div><div class="ex">The procedure is currently in clock stop.</div></div>
+<div class="term"><b>Complete Response Letter (CRL)</b><span class="zh">完全回复函</span><div class="use">FDA审评结束未批准时发出。</div><div class="ex">The CRL cited deficiencies in the manufacturing inspection.</div></div>
+<div class="term"><b>post hoc analysis</b><span class="zh">事后分析</span><div class="use">未在SAP中预设的分析。</div><div class="ex">This post hoc analysis should be interpreted as exploratory.</div></div>
+<div class="term"><b>post-marketing commitment</b><span class="zh">上市后承诺</span><div class="use">批准后需完成的研究或活动。</div><div class="ex">The sponsor agreed to a post-marketing commitment.</div></div>
+<div class="term"><b>response document</b><span class="zh">回复文件</span><div class="use">按问题逐条组织的回复。</div><div class="ex">Each response begins with a restatement of the question.</div></div>
+<h2 id="w3-qz">七、自测</h2>
+<details class="quiz"><summary>1. 收到20个问题，第一步做什么？</summary><div>拆题：明确每个问题在问什么、背后担心什么、需要哪类证据，并标记需要新分析或标签修改的“重问题”。</div></details>
+<details class="quiz"><summary>2. 一个回复只写了“详见Module 5第X节”，问题在哪里？</summary><div>没有直接回答问题。应先给出简要答案，再说明支持性证据和位置。</div></details>
+<details class="quiz"><summary>3. 中国CDE发补的时限有什么特点？</summary><div>申请人应在规定时限内一次性补充提交资料，补充资料期间不计入审评时限。</div></details>
+<h2 id="w3-s">八、公开资料来源</h2><ul class="src"><li>国家市场监督管理总局：《药品注册管理办法》（2020年）.</li><li>EMA. Centralised procedure timetables；Pre-authorisation guidance.</li><li>FDA. Good Review Practice；21 CFR 314.110 Complete response letter.</li><li>ICH M4 Common Technical Document；ICH M8 eCTD.</li></ul></article><div class="pager"><label for="t-w2"><span>上一篇</span>一份CSR从数据库锁定到定稿</label></div></section>
+<section class="page" id="p-products"><section class="hero"><div class="eyebrow">Fish · Product Journeys</div><h1>产品开发档案</h1><p>真实产品为什么这样开发：故事、专业深入与证据边界。</p><div class="count">4 篇文章</div></section><div class="list"><label class="card" for="t-p1"><span class="num">01</span><span class="txt"><span class="t">Larotrectinib / VITRAKVI</span><span class="d">为什么小样本单臂研究能够支持不分癌种上市</span><span class="go">阅读全文 —</span></span></label><label class="card" for="t-p2"><span class="num">02</span><span class="txt"><span class="t">Darolutamide / NUBEQA</span><span class="d">ARAMIS、ARASENS和ARANOTE怎样逐步扩展证据边界</span><span class="go">阅读全文 —</span></span></label><label class="card" for="t-p3"><span class="num">03</span><span class="txt"><span class="t">Finerenone / KERENDIA</span><span class="d">为什么需要肾脏和心血管两套互补证据</span><span class="go">阅读全文 —</span></span></label><label class="card" for="t-p4"><span class="num">04</span><span class="txt"><span class="t">Radium-223 / XOFIGO</span><span class="d">从ALSYMPCA成功到ERA-223失败，标签怎样被收窄</span><span class="go">阅读全文 —</span></span></label></div></section>
+
+<section class="page" id="p-p1"><label class="back" for="t-products">← 返回产品开发档案</label><article><h1>Larotrectinib / VITRAKVI：为什么小样本单臂研究能够支持不分癌种上市</h1><div class="meta">NTRK融合阳性实体瘤｜2018年FDA加速批准，2025年完全批准｜整理：2026年11月</div>
+<div class="key"><h3>三句话看懂</h3><ol><li><b>适应症不按器官定义，而按分子改变定义</b>：只要实体瘤携带NTRK基因融合，无论长在哪里都在适应症内。</li><li><b>小样本单臂研究之所以够用</b>，是因为人群极罕见、肿瘤缩小几乎不会自然发生、缓解率高且持久，并在多种癌症中表现一致。</li><li><b>“先上市、后确认”</b>：2018年基于55例加速批准，2025年扩大到339例和更长随访后转为完全批准。</li></ol></div>
+<div class="toc"><b>本文目录</b><a href="#p1-st">一、故事主文</a><a href="#p1-dp">二、专业深入</a><a href="#p1-ev">三、证据边界</a><a href="#p1-en">四、Key English</a><a href="#p1-qz">五、自测</a><a href="#p1-s">六、原始公开资料</a></div>
+<h2 id="p1-st">一、故事主文</h2><div class="story"><div class="chap">一个不按癌种的问题</div><p>大多数抗肿瘤药的开发路线是先选一个癌种，例如肺癌或乳腺癌，再按分期和治疗线逐步推进。Larotrectinib走了另一条路。它针对的是NTRK1/2/3基因融合产生的TRK融合蛋白，这种异常能持续驱动肿瘤生长，却散落在许多不同癌症中：在婴儿纤维肉瘤、分泌性乳腺癌等少见肿瘤中很常见，在肺癌、结直肠癌等常见肿瘤中则非常罕见。</p><p>这带来一个开发难题：如果按癌种一个个做研究，每个癌种可能一年只能找到几名患者。</p>
+<div class="chap">Phase I里出现的信号</div><p>2014年启动的成人Phase I研究LOXO-TRK-14001，最初入组的是晚期实体瘤患者，并不要求都有NTRK融合。研究中，携带NTRK融合的患者出现了快速、深度的肿瘤缩小。这个信号改变了开发策略：与其寻找一个癌种，不如寻找一种分子改变。</p>
+<div class="chap">三项研究同时推进</div><p>随后开发分成三条线：成人Phase I继续扩展；2015年启动的NAVIGATE是一项Phase II“篮子试验”，只要NTRK融合阳性，不同癌种的患者都可以入组；儿科Phase I/II研究SCOUT同步推进，并开发了口服液和按体表面积给药。儿童不是在成人获批后才研究的，而是从一开始就被纳入。</p>
+<div class="chap">2018年：55名患者支持加速批准</div><p>2018年11月，FDA基于三项单臂研究中前55名可评价患者批准Larotrectinib。这些患者来自12种不同癌症，独立审评的缓解率为75%，其中22%完全缓解。这是第二个获得FDA不分癌种（tissue-agnostic）适应症的肿瘤药。之后欧盟和其他地区相继批准；2022年4月，中国NMPA批准Vitrakvi，成为中国首个不分癌种适应症的治疗药物。</p>
+<div class="chap">2025年：用更大的样本完成确认</div><p>加速批准不是终点。研究持续入组、延长随访。2025年，FDA基于339名儿童和成人的汇总数据将其转为完全批准：缓解率60%，中位缓解持续时间43.3个月。缓解率比早期数字低，但缓解持续时间说明获益是持久的。</p></div>
+<h2 id="p1-dp">二、专业深入</h2>
+<h3>Q1｜为什么不需要随机对照？</h3><div class="lead">人群极罕见、ORR能归因于药物、效应大且一致，使随机研究既不可行，也不再必要。</div><p>NTRK融合在常见肿瘤中的比例很低，按癌种组织随机研究难以完成。实体瘤极少自发缩小，高比例且持久的缓解本身就能说明药物在起作用。最重要的是，不同组织来源的肿瘤都出现相似的高缓解，这种一致性很难用偶然或患者选择解释。</p>
+<h3>Q2｜检测怎样成为开发的一部分？</h3><div class="lead">药物再有效，找不到患者也无法入组和使用；检测路径与药物开发同等重要。</div><p>NTRK融合可以通过DNA或RNA测序、FISH等方法确认，pan-TRK免疫组化可作为初筛。研究允许当地实验室使用不同方法确认融合，有利于入组，但也带来方法差异。中国批准时也要求NTRK融合需通过充分验证的检测方法确认。对中心而言，能否广泛进行分子检测和接收转诊，比“是否做过很多肿瘤研究”更关键。</p>
+<h3>Q3｜缓解率从75%到60%，怎样理解？</h3><div class="lead">样本扩大、癌种增加、治疗史更复杂，缓解率下降是常见现象，关键是获益是否仍有临床意义、是否持久。</div><p>早期55例集中在反应特别好的人群和癌种；后续纳入更多癌种和更多既往治疗的患者。60%的缓解率仍然很高，中位DOR超过3年，支持了获益的持久性，也正是完全批准需要的证据。</p>
+<h3>Q4｜儿童为什么能同步开发？</h3><div class="lead">因为婴儿纤维肉瘤等儿童肿瘤恰好是NTRK融合高发的人群，儿童本身就是核心目标人群。</div><p>SCOUT需要解决成人研究不涉及的问题：适合婴幼儿的剂型、按体表面积计算剂量、年龄相关PK。对部分儿童局部肿瘤，药物缩小肿瘤后可以避免致残性手术，这也是适应症中“手术可能导致严重并发症”这一表述的临床背景。</p>
+<h2 id="p1-ev">三、证据边界</h2>
+<div class="ev ev1"><b>已经证明</b><ul><li>在NTRK融合阳性实体瘤中，药物产生高比例、持久的客观缓解，跨多种癌症一致。</li><li>安全性总体可控，常见不良反应包括乏力、头晕、便秘、恶心和转氨酶升高。</li><li>成人和儿童均有疗效数据。</li></ul></div>
+<div class="ev ev2"><b>合理推断</b><ul><li>在融合阳性人群中，持久缓解很可能转化为临床获益。</li><li>不同检测方法确认的融合阳性患者，获益大体一致。</li></ul></div>
+<div class="ev ev3"><b>仍未知 / 公开资料无法确认</b><ul><li>与其他有效治疗随机比较时，在OS等终点上的优势程度。</li><li>每个具体癌种中的精确疗效（部分癌种样本很少）。</li><li>获得性耐药突变的长期影响和后续治疗策略。</li></ul></div>
+<h2 id="p1-en">四、Key English</h2>
+<div class="term"><b>tissue-agnostic</b><span class="zh">不分癌种</span><div class="use">按分子改变而非器官定义适应症。</div><div class="ex">It was the first tissue-agnostic approval for this target.</div></div>
+<div class="term"><b>NTRK gene fusion</b><span class="zh">NTRK基因融合</span><div class="use">导致TRK融合蛋白的基因重排。</div><div class="ex">NTRK gene fusions should be identified by a validated test.</div></div>
+<div class="term"><b>basket trial</b><span class="zh">篮子试验</span><div class="use">同一靶点、多个癌种。</div><div class="ex">NAVIGATE is a basket trial enrolling patients across tumor types.</div></div>
+<div class="term"><b>pooled analysis</b><span class="zh">汇总分析</span><div class="use">合并多项研究的数据。</div><div class="ex">Efficacy was based on a pooled analysis of three trials.</div></div>
+<div class="term"><b>acquired resistance</b><span class="zh">获得性耐药</span><div class="use">治疗过程中出现的耐药。</div><div class="ex">Acquired resistance mutations may emerge on treatment.</div></div>
+<h2 id="p1-qz">五、自测</h2>
+<details class="quiz"><summary>1. 为什么Larotrectinib能以单臂研究获批，而大多数肿瘤药不能？</summary><div>人群极罕见无法随机；ORR可归因于药物；效应大而持久；不同癌种一致。</div></details>
+<details class="quiz"><summary>2. 检测为什么是开发的一部分？</summary><div>只有可靠检测才能找到患者、确认入组，并在上市后让合适患者用上药物。</div></details>
+<details class="quiz"><summary>3. 2025年转为完全批准依据了什么？</summary><div>339名患者的扩大汇总数据和更长随访，ORR 60%，中位DOR 43.3个月。</div></details>
+<h2 id="p1-s">六、原始公开资料</h2><ul class="src"><li>FDA：VITRAKVI 2018年加速批准公告；2025年完全批准信息；美国说明书。</li><li>EMA. Vitrakvi EPAR.</li><li>Bayer新闻稿：Vitrakvi在中国获批（2022年4月13日）。</li><li>Drilon A, et al. Efficacy of larotrectinib in TRK fusion–positive cancers in adults and children. NEJM 2018.</li><li>ClinicalTrials.gov：NCT02122913（LOXO-TRK-14001）、NCT02637687（SCOUT）、NCT02576431（NAVIGATE）。</li></ul></article><div class="pager"><label for="t-p2"><span>下一篇</span>Darolutamide / NUBEQA</label></div></section>
+
+<section class="page" id="p-p2"><label class="back" for="t-products">← 返回产品开发档案</label><article><h1>Darolutamide / NUBEQA：ARAMIS、ARASENS和ARANOTE怎样逐步扩展证据边界</h1><div class="meta">前列腺癌｜Bayer与Orion合作开发｜2019年FDA首次批准｜整理：2026年11月</div>
+<div class="key"><h3>三句话看懂</h3><ol><li><b>同一个药，沿着前列腺癌的病程逐步向前推进</b>：先在尚未转移的nmCRPC中证明推迟转移，再进入转移性激素敏感阶段。</li><li><b>每项Phase III回答一个不同的问题</b>：ARAMIS问“能否推迟转移”，ARASENS问“加在化疗之上能否延长生存”，ARANOTE问“不用化疗时是否仍有价值”。</li><li><b>差异化不是疗效，而是耐受性</b>：同类药物疗效相近，darolutamide几乎不透过血脑屏障，中枢不良事件较少，是它的重要定位。</li></ol></div>
+<div class="toc"><b>本文目录</b><a href="#p2-st">一、故事主文</a><a href="#p2-dp">二、专业深入</a><a href="#p2-ev">三、证据边界</a><a href="#p2-en">四、Key English</a><a href="#p2-qz">五、自测</a><a href="#p2-s">六、原始公开资料</a></div>
+<h2 id="p2-st">一、故事主文</h2><div class="story"><div class="chap">一个拥挤的赛道</div><p>Darolutamide由Orion发现，Bayer与Orion共同开发。它进入的是一个已有强劲对手的领域：enzalutamide和apalutamide都是雄激素受体抑制剂。疗效上要大幅超越并不容易，所以从早期开始，开发团队就关注另一个问题：能否在保持疗效的同时，让患者更好地耐受长期治疗。</p><p>临床前研究显示，darolutamide几乎不透过血脑屏障。对需要服药多年的老年男性来说，跌倒、认知受损、癫痫风险都很重要。</p>
+<div class="chap">第一步：尚未转移的患者</div><p>2011年启动的ARADES在晚期mCRPC患者中确认安全性、活性和剂量。随后的首个注册研究ARAMIS，却选择了一个看似“更早”的人群：非转移性去势抵抗性前列腺癌（nmCRPC），而且限定为PSA倍增时间≤10个月的高风险患者。这些患者传统影像上还没有转移，但很快会出现。</p><p>ARAMIS随机1,509人，结果显示无转移生存期中位40.4个月对18.4个月。最终分析中，即使170名安慰剂组患者已交叉用药，OS仍显著改善（HR 0.69）。2019年7月FDA批准，2021年2月中国NMPA批准。</p>
+<div class="chap">第二步：加在化疗之上</div><p>下一个问题更大：新诊断的转移性激素敏感性前列腺癌（mHSPC）。当时一部分患者会在ADT基础上加用docetaxel化疗。ARASENS问的是：在ADT + docetaxel之上再加darolutamide，能否让患者活得更久？1,305人的研究给出了答案：死亡风险降低约32%（HR 0.68）。2022年FDA批准了这一三联用法。</p>
+<div class="chap">第三步：不用化疗时</div><p>但不是每位患者都适合或愿意化疗。ARANOTE随机669人，比较darolutamide + ADT与ADT，主要终点是影像学无进展生存期，HR 0.54。2025年美国标签扩展，darolutamide可以与ADT联合用于mCSPC，同时保留三联用法。</p><p>现在，研究继续向更早的阶段推进：ARASTEP纳入根治性治疗后PSA升高、传统影像阴性但PSMA PET阳性的患者。</p></div>
+<h2 id="p2-dp">二、专业深入</h2>
+<h3>Q1｜为什么三项研究用了三种主要终点？</h3><div class="lead">终点跟着研究问题走：MFS回答“推迟转移”，OS回答“三联值不值得”，rPFS回答“双联能否扩展标签”。</div><p>nmCRPC患者生存期长，OS需要很久且会被后续治疗冲淡，所以ARAMIS选MFS。ARASENS是在已有较强治疗上做加法，需要最有说服力的生存证据。ARANOTE所在人群中，同类药物已有OS获益先例，rPFS能更快读出并支持标签扩展。详见专业知识K1。</p>
+<h3>Q2｜ARASENS的对照组为什么是ADT + docetaxel？</h3><div class="lead">对照组定义了研究能回答的问题：它证明的是“三联优于双联化疗方案”，而不是“darolutamide优于化疗”。</div><p>ARASENS按疾病范围（TNM分期）和碱性磷酸酶分层，这两者都是强预后因素。分层保证两组在关键预后上平衡。结果只能推广到适合docetaxel的患者，这也是需要ARANOTE补充双联证据的原因。</p>
+<h3>Q3｜交叉怎样影响ARAMIS的OS解读？</h3><div class="lead">交叉会让两组OS靠近，所以显著的OS结果反而说明获益稳健。</div><p>主要分析揭盲后，安慰剂组患者可以改用darolutamide，170人这样做了。按随机分组的ITT分析仍显示OS HR 0.69（95% CI 0.53–0.88）。如果没有交叉，真实生存效应很可能更大。</p>
+<h3>Q4｜全球研究为什么纳入大量亚洲和拉美中心？</h3><div class="lead">一方面为了入组速度和人群代表性，另一方面地区亚组数据可以支持当地注册。</div><p>ARANOTE在15个国家、133个中心开展，平均每中心约5人。ARASENS公开发表了日本、中国患者等亚组分析。这些亚组数据常用于支持在当地的注册和临床指南。具体的中心选择理由和各中心入组表现没有公开。</p>
+<h2 id="p2-ev">三、证据边界</h2>
+<div class="ev ev1"><b>已经证明</b><ul><li>高风险nmCRPC中，推迟转移并延长OS（ARAMIS）。</li><li>mHSPC中，在ADT + docetaxel之上延长OS（ARASENS）。</li><li>mHSPC中，与ADT联合延长rPFS（ARANOTE）。</li><li>中枢相关不良事件的发生率较低，因治疗不良事件停药比例与安慰剂相近。</li></ul></div>
+<div class="ev ev2"><b>合理推断</b><ul><li>双联方案在长期随访中也可能带来生存获益。</li><li>低中枢穿透的特点对老年、合并症患者更有临床意义。</li></ul></div>
+<div class="ev ev3"><b>仍未知 / 公开资料无法确认</b><ul><li>与enzalutamide、apalutamide的直接随机比较结果。</li><li>三联与双联之间如何为个体患者选择的最佳标准。</li><li>在PSMA PET定义的更早期人群中的获益（ARASTEP进行中）。</li></ul></div>
+<h2 id="p2-en">四、Key English</h2>
+<div class="term"><b>castration-resistant / hormone-sensitive</b><span class="zh">去势抵抗性 / 激素敏感性</span><div class="use">决定疾病阶段和适应症。</div><div class="ex">The trial enrolled patients with metastatic hormone-sensitive prostate cancer.</div></div>
+<div class="term"><b>androgen deprivation therapy (ADT)</b><span class="zh">雄激素剥夺治疗</span><div class="use">前列腺癌系统治疗基础。</div><div class="ex">All patients continued ADT.</div></div>
+<div class="term"><b>triplet / doublet therapy</b><span class="zh">三联 / 双联治疗</span><div class="use">是否包含docetaxel。</div><div class="ex">ARANOTE supports the doublet regimen without docetaxel.</div></div>
+<div class="term"><b>PSA doubling time</b><span class="zh">PSA倍增时间</span><div class="use">越短进展越快。</div><div class="ex">Eligible patients had a PSA doubling time of ten months or less.</div></div>
+<div class="term"><b>blood–brain barrier penetration</b><span class="zh">血脑屏障穿透</span><div class="use">darolutamide的差异点。</div><div class="ex">Low blood–brain barrier penetration may reduce CNS adverse events.</div></div>
+<h2 id="p2-qz">五、自测</h2>
+<details class="quiz"><summary>1. ARAMIS为什么选择PSA倍增时间≤10个月的患者？</summary><div>这些患者很快会出现转移，研究能在合理时间内积累足够的MFS事件，也是最需要推迟转移的人群。</div></details>
+<details class="quiz"><summary>2. ARASENS能否证明darolutamide优于docetaxel？</summary><div>不能。两组都用docetaxel，它证明的是在ADT + docetaxel之上加darolutamide的增量获益。</div></details>
+<details class="quiz"><summary>3. 为什么还需要ARANOTE？</summary><div>部分患者不适合或不愿化疗，需要证明不含docetaxel的双联方案价值。</div></details>
+<h2 id="p2-s">六、原始公开资料</h2><ul class="src"><li>Fizazi K, et al. ARAMIS. NEJM 2019；最终OS分析 NEJM 2020.</li><li>Smith MR, et al. ARASENS. NEJM 2022.</li><li>Saad F, et al. ARANOTE. JCO 2024.</li><li>Fizazi K, et al. ARADES. Lancet Oncology 2014.</li><li>Bayer新闻稿：Nubeqa在中国获批（2021年2月3日）；ARANOTE结果（2024年7月）.</li><li>NUBEQA美国说明书（2022、2025）；ClinicalTrials.gov：NCT02200614、NCT02799602、NCT04736199、NCT05794906。</li></ul></article><div class="pager"><label for="t-p1"><span>上一篇</span>Larotrectinib / VITRAKVI</label><label for="t-p3"><span>下一篇</span>Finerenone / KERENDIA</label></div></section>
+
+<section class="page" id="p-p3"><label class="back" for="t-products">← 返回产品开发档案</label><article><h1>Finerenone / KERENDIA：为什么需要肾脏和心血管两套互补证据</h1><div class="meta">心肾代谢｜2021年FDA首次批准｜整理：2026年11月</div>
+<div class="key"><h3>三句话看懂</h3><ol><li><b>糖尿病肾病患者同时面临肾衰竭和心血管事件两类风险</b>，只证明其中一类，无法完整回答“这个药对患者有什么用”。</li><li><b>两项Phase III互为镜像</b>：FIDELIO-DKD以肾脏结局为主、偏中晚期CKD；FIGARO-DKD以心血管结局为主、偏早期CKD，合起来覆盖完整疾病谱。</li><li><b>获批后继续向外扩展</b>：心衰（FINEARTS-HF）证明新的治疗领域，1型糖尿病（FINE-ONE）借助已验证的UACR关系做小型研究。</li></ol></div>
+<div class="toc"><b>本文目录</b><a href="#p3-st">一、故事主文</a><a href="#p3-dp">二、专业深入</a><a href="#p3-ev">三、证据边界</a><a href="#p3-en">四、Key English</a><a href="#p3-qz">五、自测</a><a href="#p3-s">六、原始公开资料</a></div>
+<h2 id="p3-st">一、故事主文</h2><div class="story"><div class="chap">一个老机制的新问题</div><p>盐皮质激素受体过度激活会促进肾脏和心脏的炎症与纤维化。螺内酯、依普利酮等甾体MRA可以阻断这一通路，但在CKD患者中，高钾血症风险限制了使用。Finerenone是一种非甾体、选择性MR拮抗剂，开发要回答的核心问题是：能否保留获益，同时让安全性更可控。</p>
+<div class="chap">先用90天找剂量</div><p>2013至2014年的Phase IIb研究ARTS-DN，在23个国家148个中心随机823人，测试7个剂量与安慰剂，主要终点是90天时尿白蛋白/肌酐比值（UACR）的变化。UACR呈剂量依赖性下降，因高钾停药比例较低，为Phase III的10/20 mg剂量策略提供了依据。</p><p>但UACR只是替代终点。要证明患者真正获益，必须看肾衰竭、心血管死亡这样的硬结局。</p>
+<div class="chap">两项研究，同时启动</div><p>2015年，两项Phase III几乎同时启动。FIDELIO-DKD在48个国家913个中心随机5,734人，主要终点是肾脏复合结局；FIGARO-DKD随机7,437人，主要终点是心血管复合结局。两者入组标准互补：FIDELIO偏向肾功能更差、白蛋白尿更重的患者，FIGARO纳入更早期、更广的CKD人群。</p><p>FIDELIO肾脏终点HR 0.82；FIGARO心血管终点HR 0.87，主要由心衰住院减少驱动。2021年7月FDA批准；中国NMPA于2022年6月依据FIDELIO批准，2023年5月纳入FIGARO数据扩展标签。</p>
+<div class="chap">走出肾脏</div><p>心衰住院的减少提示了新的方向。FINEARTS-HF在LVEF≥40%的心衰患者中随机6,001人，主要终点是心血管死亡和总心衰事件，结果RR 0.84。2025年7月，FDA批准心衰适应症。随后，FINE-ONE在1型糖尿病合并CKD患者中开展，242人、6个月，UACR相对安慰剂降低25%。</p></div>
+<h2 id="p3-dp">二、专业深入</h2>
+<h3>Q1｜为什么不只做一项大研究？</h3><div class="lead">一项研究很难同时在肾脏和心血管两类终点上都有足够统计效力，而且目标人群的风险结构不同。</div><p>晚期CKD患者肾脏事件多，适合检验肾脏终点；早期CKD患者肾衰竭少，但心血管风险高。如果只做一项研究，要么人群混杂导致两类事件都不够，要么只能回答一个问题。两项互补研究再加上预设的FIDELITY汇总分析（超过13,000人），能覆盖完整的疾病谱。</p>
+<h3>Q2｜复合终点的组分为什么要拆开看？</h3><div class="lead">FIGARO的整体心血管获益主要来自心衰住院减少，不能把它说成“降低心梗和卒中”。</div><p>FIGARO心血管复合终点HR 0.87（95% CI 0.76–0.98），心衰住院HR 0.71。这一组分信息后来正好成为开展FINEARTS-HF的重要依据。肾脏次要终点HR 0.87（95% CI 0.76–1.01）未达统计学显著，在FIGARO单项研究中不能下结论。</p>
+<h3>Q3｜高钾血症怎样被“设计”进研究？</h3><div class="lead">安全性风险直接决定了入组门槛、起始剂量和滴定规则。</div><p>入组要求血钾≤4.8 mmol/L；根据eGFR决定10 mg或20 mg起始；按血钾调整剂量。FIDELIO中因高钾停药为2.3%对0.9%。这些规则后来也进入说明书的用药监测要求。</p>
+<h3>Q4｜为什么FINE-ONE可以只做242人、6个月？</h3><div class="lead">因为2型糖尿病研究已经建立了UACR下降与结局改善的联系，可以把这一关系借用到相似人群。</div><p>在1型糖尿病中再做一项数千人、数年的结局研究成本高且耗时。FINE-ONE仍然随机、双盲、安慰剂对照，只是选择了已有证据支持的替代终点。这是生命周期管理中常见的“证据外推”。</p>
+<h2 id="p3-ev">三、证据边界</h2>
+<div class="ev ev1"><b>已经证明</b><ul><li>2型糖尿病合并CKD中，降低肾脏复合结局（FIDELIO）和心血管复合结局（FIGARO）。</li><li>LVEF≥40%的心衰患者中，减少心血管死亡和总心衰事件（FINEARTS-HF）。</li><li>1型糖尿病合并CKD中，降低UACR（FINE-ONE）。</li></ul></div>
+<div class="ev ev2"><b>合理推断</b><ul><li>1型糖尿病中UACR下降可能转化为肾脏结局获益。</li><li>与SGLT2抑制剂联合可能有互补作用（研究期间背景治疗在变化）。</li></ul></div>
+<div class="ev ev3"><b>仍未知 / 公开资料无法确认</b><ul><li>1型糖尿病人群中的硬结局获益。</li><li>与SGLT2抑制剂、GLP-1受体激动剂的最佳联合顺序。</li><li>非糖尿病CKD中的获益（相关研究和申报在推进中）。</li></ul></div>
+<h2 id="p3-en">四、Key English</h2>
+<div class="term"><b>mineralocorticoid receptor antagonist (MRA)</b><span class="zh">盐皮质激素受体拮抗剂</span><div class="use">finerenone为非甾体型。</div><div class="ex">Finerenone is a nonsteroidal, selective MRA.</div></div>
+<div class="term"><b>UACR</b><span class="zh">尿白蛋白/肌酐比值</span><div class="use">CKD的重要替代终点。</div><div class="ex">The primary endpoint was the change in UACR from baseline.</div></div>
+<div class="term"><b>kidney composite outcome</b><span class="zh">肾脏复合结局</span><div class="use">肾衰竭、eGFR持续下降、肾性死亡。</div><div class="ex">FIDELIO met its kidney composite primary outcome.</div></div>
+<div class="term"><b>hyperkalemia</b><span class="zh">高钾血症</span><div class="use">MRA类药物关键安全问题。</div><div class="ex">Hyperkalemia leading to discontinuation was infrequent.</div></div>
+<div class="term"><b>total heart failure events</b><span class="zh">总心衰事件</span><div class="use">包括首次和复发事件。</div><div class="ex">FINEARTS-HF used total heart failure events in the primary endpoint.</div></div>
+<h2 id="p3-qz">五、自测</h2>
+<details class="quiz"><summary>1. ARTS-DN为什么用UACR而不是硬结局？</summary><div>目的是在90天内用较小样本确定剂量；替代终点无法证明结局获益，所以还需要Phase III。</div></details>
+<details class="quiz"><summary>2. FIDELIO与FIGARO的入组人群有何不同？</summary><div>FIDELIO偏中晚期CKD、白蛋白尿更重；FIGARO纳入更早期、更广的CKD人群。</div></details>
+<details class="quiz"><summary>3. FIGARO结果为何促成了FINEARTS-HF？</summary><div>心血管获益主要由心衰住院减少驱动，提示药物可能在心衰中有作用。</div></details>
+<h2 id="p3-s">六、原始公开资料</h2><ul class="src"><li>Bakris GL, et al. ARTS-DN. JAMA 2015.</li><li>Bakris GL, et al. FIDELIO-DKD. NEJM 2020；Pitt B, et al. FIGARO-DKD. NEJM 2021；Agarwal R, et al. FIDELITY. Eur Heart J 2022.</li><li>Solomon SD, et al. FINEARTS-HF. NEJM 2024.</li><li>Bayer新闻稿：中国批准（2022年6月30日）、中国标签扩展（2023年5月17日）、FDA心衰批准（2025年7月）、FINE-ONE结果（2025年11月）.</li><li>KERENDIA美国说明书；ClinicalTrials.gov：NCT02540993、NCT02545049。</li></ul></article><div class="pager"><label for="t-p2"><span>上一篇</span>Darolutamide / NUBEQA</label><label for="t-p4"><span>下一篇</span>Radium-223 / XOFIGO</label></div></section>
+
+<section class="page" id="p-p4"><label class="back" for="t-products">← 返回产品开发档案</label><article><h1>Radium-223 / XOFIGO：从ALSYMPCA成功到ERA-223失败</h1><div class="meta">前列腺癌骨转移｜放射性药物｜2013年FDA批准｜整理：2026年11月</div>
+<div class="key"><h3>三句话看懂</h3><ol><li><b>首个获批的alpha粒子放射性药物</b>：它模拟钙，聚集在骨转移周围，短射程的alpha辐射杀伤肿瘤细胞。</li><li><b>ALSYMPCA用OS证明了生存获益</b>，让骨靶向治疗第一次不只是“减少骨事件”。</li><li><b>ERA-223说明“两个有效药物同时用”不一定更好</b>：与abiraterone联合增加了骨折和死亡风险，欧盟随后收窄了适应症。</li></ol></div>
+<div class="toc"><b>本文目录</b><a href="#p4-st">一、故事主文</a><a href="#p4-dp">二、专业深入</a><a href="#p4-ev">三、证据边界</a><a href="#p4-en">四、Key English</a><a href="#p4-qz">五、自测</a><a href="#p4-s">六、原始公开资料</a></div>
+<h2 id="p4-st">一、故事主文</h2><div class="story"><div class="chap">一种特别的药</div><p>Radium-223是放射性元素，化学性质与钙相似。进入体内后，它会聚集在骨转换活跃的地方，也就是前列腺癌骨转移周围，释放射程不到约100微米的高能alpha粒子，造成肿瘤细胞DNA双链断裂。射程短，意味着对周围骨髓的损伤相对有限。</p><p>前列腺癌晚期最常见的转移部位是骨，骨痛、骨折和脊髓压迫严重影响生活质量。</p>
+<div class="chap">ALSYMPCA：用OS证明价值</div><p>2008年启动的Phase III研究ALSYMPCA，纳入921名有症状骨转移、无已知内脏转移的去势抵抗性前列腺癌患者，2:1随机，每4周注射一次，共6次。期中分析时，研究跨过预设疗效边界，独立数据监查委员会建议提前停止，安慰剂组患者可以交叉。中位OS 14.9个月对11.3个月（HR 0.70），首次症状性骨事件时间也明显推迟。2013年5月FDA批准。</p>
+<div class="chap">ERA-223：想更早、更多地用</div><p>下一步很自然：能否在更早期、症状更轻的患者中，把radium-223与当时的标准药物abiraterone加泼尼松同时使用？ERA-223在19个国家165家中心随机806人。2017年底，未清理的初步数据提示试验组骨折和死亡增加。最终结果：骨折28.6%对11.4%，中位OS 30.7对33.3个月（HR 1.195）。</p>
+<div class="chap">监管重新评估</div><p>欧洲药品管理局启动Article 20程序重新评估获益风险，2018年确认：禁止与abiraterone加泼尼松联合；在欧洲仅用于既往至少接受两种系统治疗或无法接受其他治疗的患者；不用于无症状骨转移；治疗前评估骨健康，并考虑使用双膦酸盐或地舒单抗。产品没有撤市，但使用范围被收窄。</p></div>
+<h2 id="p4-dp">二、专业深入</h2>
+<h3>Q1｜为什么ALSYMPCA要排除内脏转移？</h3><div class="lead">药物靠骨转换定位，对肝、肺等软组织转移没有直接作用。</div><p>如果纳入大量内脏转移患者，疾病进展主要来自药物到达不了的病灶，药物效应会被稀释，也不符合作用机制。因此适应症明确限定为以骨转移为主的患者。</p>
+<h3>Q2｜ERA-223为什么失败？</h3><div class="lead">作用于骨的放射性药物、改变骨代谢的激素治疗，以及更早期的患者，三者叠加后风险改变。</div><p>同时使用abiraterone和泼尼松可能影响骨质；radium-223又集中作用于高骨转换区域。研究还发现，同时使用双膦酸盐或地舒单抗的患者骨折风险较低，这提示骨保护是重要的风险控制措施。此外，研究人群比ALSYMPCA更早期、症状更轻，基线风险和可接受的获益风险阈值都不同。</p>
+<h3>Q3｜放射性药物在运营上有什么特殊？</h3><div class="lead">核素会持续衰变，供应链要倒推到给药当天，延误会直接损失可用活度。</div><p>Radium-223半衰期约11.4天，每一剂按参考日期标定活度。生产、国际运输、清关、医院接收和核医学排程必须同步。中心需要放射性药物使用许可、核医学和辐射安全团队、废物和排泄物管理。2014年部分批次因质量问题导致暂时短缺，更换瓶塞并完成纠正措施后于2015年恢复供应。</p>
+<h3>Q4｜标签被收窄，说明药物没用了吗？</h3><div class="lead">不是。监管区分“产品本身是否有效”和“某种组合或人群是否获益大于风险”。</div><p>ALSYMPCA证明的获益依然成立。ERA-223改变的是对“与谁联合、在什么阶段用”的认识。上市后研究既可以扩大标签，也可以收窄标签，这都是生命周期管理的一部分。</p>
+<h2 id="p4-ev">三、证据边界</h2>
+<div class="ev ev1"><b>已经证明</b><ul><li>症状性骨转移、无内脏转移的CRPC中，延长OS并推迟症状性骨事件（ALSYMPCA）。</li><li>与abiraterone加泼尼松同时使用增加骨折，并有不利的生存趋势（ERA-223）。</li></ul></div>
+<div class="ev ev2"><b>合理推断</b><ul><li>骨保护药物可以降低radium-223治疗中的骨折风险。</li><li>与其他新型激素治疗的序贯使用可能可行，但需要证据支持。</li></ul></div>
+<div class="ev ev3"><b>仍未知 / 公开资料无法确认</b><ul><li>与其他药物同时联合（如与新型AR抑制剂）的获益风险，需相关研究结果。</li><li>在无症状或低负荷骨转移患者中的最佳使用时机。</li></ul></div>
+<h2 id="p4-en">四、Key English</h2>
+<div class="term"><b>alpha-particle emitter</b><span class="zh">alpha粒子发射体</span><div class="use">高能量、短射程。</div><div class="ex">Radium-223 is an alpha-particle emitter targeting bone metastases.</div></div>
+<div class="term"><b>calcium mimetic</b><span class="zh">钙模拟物</span><div class="use">像钙一样定位于骨。</div><div class="ex">As a calcium mimetic, it binds to areas of increased bone turnover.</div></div>
+<div class="term"><b>symptomatic skeletal event (SSE)</b><span class="zh">症状性骨事件</span><div class="use">骨放疗、病理性骨折、脊髓压迫等。</div><div class="ex">Radium-223 delayed the time to first SSE.</div></div>
+<div class="term"><b>Article 20 referral</b><span class="zh">欧盟第20条再评价</span><div class="use">因安全性问题重新评估获益风险。</div><div class="ex">The Article 20 review resulted in restrictions on use.</div></div>
+<div class="term"><b>bone-protecting agent</b><span class="zh">骨保护药物</span><div class="use">双膦酸盐或地舒单抗。</div><div class="ex">Concomitant bone-protecting agents reduced fracture risk.</div></div>
+<h2 id="p4-qz">五、自测</h2>
+<details class="quiz"><summary>1. ALSYMPCA为什么用OS作主要终点？</summary><div>当时骨靶向药物能减少骨事件但未被证明延长生存；只有OS能把产品定位为改变疾病结局。</div></details>
+<details class="quiz"><summary>2. ERA-223的教训是什么？</summary><div>两个有效药物同时使用可能产生新的风险；人群从晚期外推到早期，获益风险会改变。</div></details>
+<details class="quiz"><summary>3. 为什么放射性药物供应链特别？</summary><div>核素持续衰变，生产和运输必须按给药日期倒推安排，延误会损失可用活度。</div></details>
+<h2 id="p4-s">六、原始公开资料</h2><ul class="src"><li>Parker C, et al. ALSYMPCA. NEJM 2013.</li><li>Smith M, et al. ERA-223. Lancet Oncology 2019.</li><li>EMA：Xofigo Article 20 referral（2018）；PRAC评估报告.</li><li>FDA：Xofigo 2013年批准文件与说明书；FDA 2015年供应恢复通知.</li><li>ClinicalTrials.gov：NCT00699751（ALSYMPCA）、NCT02043678（ERA-223）。</li></ul></article><div class="pager"><label for="t-p3"><span>上一篇</span>Finerenone / KERENDIA</label></div></section>
+<footer class="foot"><i class="fishw">Fish</i> Pharma R&amp;D Library · 仅基于公开资料整理 · 2026</footer><a class="totop" href="#" aria-label="回到顶部" title="回到顶部"><svg viewBox="0 0 64 64" aria-hidden="true">
+<g transform="rotate(90 32 32)"><g class="swim"><path class="tail" d="M44 32 L55 22.5 Q51.5 32 55 41.5 Z" fill="#f6ece6"/>
+<path class="fin" d="M26 25.5 Q31 17.5 37.5 25 Z" fill="#e7c7d1"/>
+<path d="M11 32 C16.5 21.5 33 19.5 45.5 32 C33 44.5 16.5 42.5 11 32 Z" fill="#f6ece6"/>
+<path d="M29.5 26.5 Q32.5 32 29.5 37.5" fill="none" stroke="#d9b4bf" stroke-width="1.1" stroke-linecap="round"/>
+<circle cx="20" cy="30.6" r="2.1" fill="#6e3550"/><circle cx="20.7" cy="29.9" r=".7" fill="#fff"/></g></g>
+<circle class="bub b1" cx="29" cy="7" r="1.8" fill="none" stroke="#f6ece6" stroke-width=".9"/>
+<circle class="bub b2" cx="35" cy="5" r="1.2" fill="none" stroke="#f6ece6" stroke-width=".8"/></svg></a></main></body></html>
